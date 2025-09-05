@@ -3,120 +3,259 @@
       th:replace="~{base::layout(~{::section})}">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
+    <title>ShoeHub - Create Account</title>
 </head>
 <body>
 <section>
-    <div class="container mt-5 p-5">
-        <div class="row">
-            <div class="col-md-5 p-5">
-                <img alt="" src="img/ecom.png" width="100%" height="400px">
-            </div>
-            <div class="col-md-7 p-2">
-                <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
-                    <div class="card-header">
-                        <p class="fs-4 text-center">Register</p>
-
-                        <!--TO show the Messages-->
-                        <th:block th:if="${session.succMsg}">
-                            <p class="text-success fw-bold">[[${session.succMsg}]]</p>
-                            <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
-                        </th:block>
-
-                        <th:block th:if="${session.errorMsg}">
-                            <p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
-                            <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
-                        </th:block>
+    <!-- Registration Page with Modern Design -->
+    <div class="register-container" style="min-height: 100vh; background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%); padding-top: 100px; padding-bottom: 50px;">
+        <div class="container">
+            <div class="row justify-content-center align-items-start">
+                <!-- Left Side - Welcome Section -->
+                <div class="col-lg-5 col-md-6 mb-5 mb-md-0">
+                    <div class="welcome-section text-center p-4">
+                        <div class="welcome-image mb-4" style="position: relative;">
+                            <div class="image-container" style="position: relative; display: inline-block;">
+                                <img src="img/ecom.png" class="img-fluid rounded-4 shadow-lg" 
+                                     style="max-width: 100%; height: 400px; object-fit: cover; border: 3px solid rgba(102, 126, 234, 0.2);">
+                                <div class="image-overlay position-absolute top-0 start-0 w-100 h-100 rounded-4" 
+                                     style="background: linear-gradient(45deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);"></div>
+                            </div>
+                        </div>
+                        <h2 class="display-6 fw-bold mb-3" style="color: #333;">
+                            Join <span style="color: #667eea;">ShoeHub</span> Family
+                        </h2>
+                        <p class="lead text-muted mb-4">
+                            Create your account and step into a world of premium footwear and exclusive deals
+                        </p>
+                        <div class="benefits-list">
+                            <div class="benefit-item d-flex align-items-center justify-content-center mb-3">
+                                <i class="fas fa-gift me-3" style="color: #667eea; font-size: 1.2rem;"></i>
+                                <span class="text-muted">Exclusive Member Discounts</span>
+                            </div>
+                            <div class="benefit-item d-flex align-items-center justify-content-center mb-3">
+                                <i class="fas fa-truck me-3" style="color: #28a745; font-size: 1.2rem;"></i>
+                                <span class="text-muted">Free Shipping on Orders</span>
+                            </div>
+                            <div class="benefit-item d-flex align-items-center justify-content-center mb-3">
+                                <i class="fas fa-star me-3" style="color: #ffd700; font-size: 1.2rem;"></i>
+                                <span class="text-muted">Early Access to New Arrivals</span>
+                            </div>
+                            <div class="benefit-item d-flex align-items-center justify-content-center">
+                                <i class="fas fa-headset me-3" style="color: #ff6b6b; font-size: 1.2rem;"></i>
+                                <span class="text-muted">24/7 Priority Support</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <form action="/saveUser" enctype="multipart/form-data" method="post">
+                </div>
 
-                            <div class="row">
-                                <div class="col">
-                                    <label class="form-label">Full Name</label> <input
-                                        class="form-control" name="name" type="text">
+                <!-- Right Side - Registration Form -->
+                <div class="col-lg-7 col-md-6">
+                    <div class="register-form-container">
+                        <div class="card border-0 shadow-lg rounded-4 overflow-hidden" 
+                             style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);">
+                            
+                            <!-- Card Header -->
+                            <div class="card-header border-0 text-center py-4" 
+                                 style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <div class="register-icon mb-3">
+                                    <i class="fas fa-user-plus" style="font-size: 3rem; color: #ffd700;"></i>
                                 </div>
+                                <h3 class="fw-bold text-white mb-2">Create Account</h3>
+                                <p class="text-white-50 mb-0">Join thousands of happy customers</p>
 
-                                <div class="col">
-                                    <label class="form-label">Mobile Number</label> <input
-                                        class="form-control" name="mobileNumber" type="number">
-                                </div>
+                                <!-- Display success message -->
+                                <th:block th:if="${session.succMsg}">
+                                    <div class="alert alert-success mt-3 mx-3 rounded-3 border-0" 
+                                         style="background: rgba(25, 135, 84, 0.1); color: #198754; border: 1px solid rgba(25, 135, 84, 0.3) !important;">
+                                        <i class="fas fa-check-circle me-2"></i>[[${session.succMsg}]]
+                                    </div>
+                                    <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+                                </th:block>
 
+                                <!-- Display error message -->
+                                <th:block th:if="${session.errorMsg}">
+                                    <div class="alert alert-danger mt-3 mx-3 rounded-3 border-0" 
+                                         style="background: rgba(220, 53, 69, 0.1); color: #dc3545; border: 1px solid rgba(220, 53, 69, 0.3) !important;">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>[[${session.errorMsg}]]
+                                    </div>
+                                    <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+                                </th:block>
                             </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Email</label> <input
-                                    class="form-control" name="email" type="email">
+                            <!-- Card Body -->
+                            <div class="card-body p-4">
+                                <form action="/saveUser" enctype="multipart/form-data" method="post" class="register-form">
+                                    
+                                    <!-- Personal Information Section -->
+                                    <div class="form-section mb-4">
+                                        <h5 class="fw-bold mb-3" style="color: #667eea;">
+                                            <i class="fas fa-user me-2"></i>Personal Information
+                                        </h5>
+                                        
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label fw-semibold mb-2" style="color: #333;">
+                                                    <i class="fas fa-id-card me-2" style="color: #667eea;"></i>Full Name
+                                                </label>
+                                                <input class="form-control form-control-lg rounded-3 border-0 shadow-sm" 
+                                                       name="name" type="text" placeholder="Enter your full name"
+                                                       style="background: #f8f9fa; transition: all 0.3s ease; padding: 12px 16px;"
+                                                       onfocus="this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'; this.style.background='white'"
+                                                       onblur="this.style.boxShadow='none'; this.style.background='#f8f9fa'">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label fw-semibold mb-2" style="color: #333;">
+                                                    <i class="fas fa-phone me-2" style="color: #667eea;"></i>Mobile Number
+                                                </label>
+                                                <input class="form-control form-control-lg rounded-3 border-0 shadow-sm" 
+                                                       name="mobileNumber" type="number" placeholder="Enter mobile number"
+                                                       style="background: #f8f9fa; transition: all 0.3s ease; padding: 12px 16px;"
+                                                       onfocus="this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'; this.style.background='white'"
+                                                       onblur="this.style.boxShadow='none'; this.style.background='#f8f9fa'">
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold mb-2" style="color: #333;">
+                                                <i class="fas fa-envelope me-2" style="color: #667eea;"></i>Email Address
+                                            </label>
+                                            <input class="form-control form-control-lg rounded-3 border-0 shadow-sm" 
+                                                   name="email" type="email" placeholder="Enter your email address"
+                                                   style="background: #f8f9fa; transition: all 0.3s ease; padding: 12px 16px;"
+                                                   onfocus="this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'; this.style.background='white'"
+                                                   onblur="this.style.boxShadow='none'; this.style.background='#f8f9fa'">
+                                        </div>
+                                    </div>
+
+                                    <!-- Address Information Section -->
+                                    <div class="form-section mb-4">
+                                        <h5 class="fw-bold mb-3" style="color: #667eea;">
+                                            <i class="fas fa-map-marker-alt me-2"></i>Address Information
+                                        </h5>
+                                        
+                                        <div class="row mb-3">
+                                            <div class="col-md-8">
+                                                <label class="form-label fw-semibold mb-2" style="color: #333;">
+                                                    <i class="fas fa-home me-2" style="color: #667eea;"></i>Address
+                                                </label>
+                                                <input class="form-control form-control-lg rounded-3 border-0 shadow-sm" 
+                                                       name="address" type="text" placeholder="Enter your address"
+                                                       style="background: #f8f9fa; transition: all 0.3s ease; padding: 12px 16px;"
+                                                       onfocus="this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'; this.style.background='white'"
+                                                       onblur="this.style.boxShadow='none'; this.style.background='#f8f9fa'">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="form-label fw-semibold mb-2" style="color: #333;">
+                                                    <i class="fas fa-city me-2" style="color: #667eea;"></i>City
+                                                </label>
+                                                <input class="form-control form-control-lg rounded-3 border-0 shadow-sm" 
+                                                       name="city" type="text" placeholder="City"
+                                                       style="background: #f8f9fa; transition: all 0.3s ease; padding: 12px 16px;"
+                                                       onfocus="this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'; this.style.background='white'"
+                                                       onblur="this.style.boxShadow='none'; this.style.background='#f8f9fa'">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label fw-semibold mb-2" style="color: #333;">
+                                                    <i class="fas fa-flag me-2" style="color: #667eea;"></i>State
+                                                </label>
+                                                <input class="form-control form-control-lg rounded-3 border-0 shadow-sm" 
+                                                       name="state" type="text" placeholder="Enter state"
+                                                       style="background: #f8f9fa; transition: all 0.3s ease; padding: 12px 16px;"
+                                                       onfocus="this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'; this.style.background='white'"
+                                                       onblur="this.style.boxShadow='none'; this.style.background='#f8f9fa'">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label fw-semibold mb-2" style="color: #333;">
+                                                    <i class="fas fa-mail-bulk me-2" style="color: #667eea;"></i>Pincode
+                                                </label>
+                                                <input class="form-control form-control-lg rounded-3 border-0 shadow-sm" 
+                                                       name="pinCode" type="number" placeholder="Enter pincode"
+                                                       style="background: #f8f9fa; transition: all 0.3s ease; padding: 12px 16px;"
+                                                       onfocus="this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'; this.style.background='white'"
+                                                       onblur="this.style.boxShadow='none'; this.style.background='#f8f9fa'">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Security Section -->
+                                    <div class="form-section mb-4">
+                                        <h5 class="fw-bold mb-3" style="color: #667eea;">
+                                            <i class="fas fa-shield-alt me-2"></i>Security
+                                        </h5>
+                                        
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label class="form-label fw-semibold mb-2" style="color: #333;">
+                                                    <i class="fas fa-lock me-2" style="color: #667eea;"></i>Password
+                                                </label>
+                                                <input class="form-control form-control-lg rounded-3 border-0 shadow-sm" 
+                                                       name="password" type="password" placeholder="Create password"
+                                                       style="background: #f8f9fa; transition: all 0.3s ease; padding: 12px 16px;"
+                                                       onfocus="this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'; this.style.background='white'"
+                                                       onblur="this.style.boxShadow='none'; this.style.background='#f8f9fa'">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label fw-semibold mb-2" style="color: #333;">
+                                                    <i class="fas fa-lock me-2" style="color: #667eea;"></i>Confirm Password
+                                                </label>
+                                                <input class="form-control form-control-lg rounded-3 border-0 shadow-sm" 
+                                                       name="cpassword" type="password" placeholder="Confirm password"
+                                                       style="background: #f8f9fa; transition: all 0.3s ease; padding: 12px 16px;"
+                                                       onfocus="this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'; this.style.background='white'"
+                                                       onblur="this.style.boxShadow='none'; this.style.background='#f8f9fa'">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Profile Image Section -->
+                                    <div class="form-section mb-4">
+                                        <h5 class="fw-bold mb-3" style="color: #667eea;">
+                                            <i class="fas fa-camera me-2"></i>Profile Picture
+                                        </h5>
+                                        
+                                        <div class="mb-3">
+                                            <label class="form-label fw-semibold mb-2" style="color: #333;">
+                                                <i class="fas fa-image me-2" style="color: #667eea;"></i>Choose Profile Image
+                                            </label>
+                                            <input class="form-control form-control-lg rounded-3 border-0 shadow-sm" 
+                                                   name="img" type="file" accept="image/*"
+                                                   style="background: #f8f9fa; transition: all 0.3s ease; padding: 12px 16px;"
+                                                   onfocus="this.style.boxShadow='0 0 0 3px rgba(102, 126, 234, 0.1)'; this.style.background='white'"
+                                                   onblur="this.style.boxShadow='none'; this.style.background='#f8f9fa'">
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-lg w-100 rounded-3 fw-semibold py-3 mb-4 shadow-sm"
+                                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; color: white; transition: all 0.3s ease;"
+                                            onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(102, 126, 234, 0.3)'"
+                                            onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.2)'">
+                                        <i class="fas fa-user-plus me-2"></i>Create My ShoeHub Account
+                                    </button>
+                                </form>
                             </div>
 
-
-                            <div class="row">
-                                <div class="col">
-                                    <label class="form-label">Address</label> <input
-                                        class="form-control" name="address" type="text">
+                            <!-- Card Footer -->
+                            <div class="card-footer border-0 text-center py-4" style="background: #f8f9fa;">
+                                <div class="login-link">
+                                    <span class="text-muted">Already have an account?</span>
+                                    <a href="/login" class="text-decoration-none fw-semibold ms-2" 
+                                       style="color: #667eea; transition: all 0.3s ease;"
+                                       onmouseover="this.style.color='#764ba2'"
+                                       onmouseout="this.style.color='#667eea'">
+                                        <i class="fas fa-sign-in-alt me-1"></i>Sign In
+                                    </a>
                                 </div>
-
-                                <div class="col">
-                                    <label class="form-label">City</label> <input
-                                        class="form-control" name="city" type="text">
-                                </div>
-
                             </div>
-
-                            <div class="row">
-                                <div class="col">
-                                    <label class="form-label">State</label> <input
-                                        class="form-control" name="state" type="text">
-                                </div>
-
-                                <div class="col">
-                                    <label class="form-label">Pincode</label> <input
-                                        class="form-control" name="pinCode" type="number">
-                                </div>
-
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col">
-                                    <label class="form-label">Password</label> <input
-                                        class="form-control" name="password" type="password">
-                                </div>
-
-                                <div class="col">
-                                    <label class="form-label">Confirm Password</label> <input
-                                        class="form-control" name="cpassword" type="password">
-                                </div>
-
-                            </div>
-
-
-
-                            <div class="mb-3">
-                                <label class="form-label">Profile Image</label> <input
-                                    class="form-control" name="img" type="file">
-                            </div>
-
-
-
-
-
-
-                            <button type="submit"
-                                    class="btn bg-primary text-white col-md-12">Register</button>
-                        </form>
-                    </div>
-
-                    <div class="card-footer text-center">
-
-                        have an account ? <a href="/login" class="text-decoration-none">Login
-                    </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </section>
 </body>
 </html>

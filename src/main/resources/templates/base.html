@@ -19,56 +19,125 @@
 </head>
 <body>
 <!-- Start Navbar  -->
-<nav class="navbar navbar-expand-lg  bg-primary fixed-top navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">ShoeHub</a>
-        <button class="navbar-toggler" type="button"
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); box-shadow: 0 2px 15px rgba(0,0,0,0.1); backdrop-filter: blur(10px);">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand fw-bold fs-3" href="#" style="color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+            <i class="fas fa-shoe-prints me-2" style="color: #ffd700;"></i>ShoeHub
+        </a>
+        <button class="navbar-toggler border-0" type="button"
                 data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+                aria-label="Toggle navigation" style="box-shadow: none;">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active"
-                                        aria-current="page" href="/"><i class="fa-solid fa-house"></i>
-                    Home</a></li>
-                <li class="nav-item"><a class="nav-link active"
-                                        aria-current="page" href="/products">Product</a></li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Category </a>
-                    <ul class="dropdown-menu">
-                        <li th:each="c:${categorys}"><a class="dropdown-item" th:href="@{'/products?category='+${c.name}}">[[${c.name}]]</a></li>
+                <li class="nav-item mx-1">
+                    <a class="nav-link px-3 py-2 rounded-pill transition-all" 
+                       aria-current="page" href="/" 
+                       style="color: #fff; transition: all 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'"
+                       onmouseout="this.style.backgroundColor='transparent'; this.style.transform='translateY(0)'">
+                        <i class="fa-solid fa-house me-2"></i>Home
+                    </a>
+                </li>
+                <li class="nav-item mx-1">
+                    <a class="nav-link px-3 py-2 rounded-pill" 
+                       aria-current="page" href="/products"
+                       style="color: #fff; transition: all 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'"
+                       onmouseout="this.style.backgroundColor='transparent'; this.style.transform='translateY(0)'">
+                        <i class="fas fa-shopping-bag me-2"></i>Products
+                    </a>
+                </li>
+                <li class="nav-item dropdown mx-1">
+                    <a class="nav-link dropdown-toggle px-3 py-2 rounded-pill" 
+                       href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                       style="color: #fff; transition: all 0.3s ease;"
+                       onmouseover="this.style.backgroundColor='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'"
+                       onmouseout="this.style.backgroundColor='transparent'; this.style.transform='translateY(0)'">
+                        <i class="fas fa-tags me-2"></i>Categories
+                    </a>
+                    <ul class="dropdown-menu border-0 shadow-lg" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 15px;">
+                        <li th:each="c:${categorys}">
+                            <a class="dropdown-item py-2 px-3 rounded-3 mx-2 my-1" 
+                               th:href="@{'/products?category='+${c.name}}"
+                               style="transition: all 0.3s ease;"
+                               onmouseover="this.style.backgroundColor='#667eea'; this.style.color='white'"
+                               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#333'">
+                                [[${c.name}]]
+                            </a>
+                        </li>
                     </ul>
                 </li>
-
             </ul>
 
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <th:block th:if="${user==null}">
-                    <li class="nav-item">
-                        <a class="nav-link active"aria-current="page" href="/signin">
-                        <i class="fa-solid fa-right-to-bracket"></i> LOGIN</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link active"aria-current="page" href="/register">REGISTER</a></li>
-                    <li class="nav-item"><a class="nav-link active"aria-current="page" href="#">ADMIN</a></li>
-
+                    <li class="nav-item mx-1">
+                        <a class="nav-link px-3 py-2 rounded-pill" aria-current="page" href="/signin"
+                           style="color: #fff; transition: all 0.3s ease;"
+                           onmouseover="this.style.backgroundColor='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'"
+                           onmouseout="this.style.backgroundColor='transparent'; this.style.transform='translateY(0)'">
+                            <i class="fa-solid fa-right-to-bracket me-2"></i>LOGIN
+                        </a>
+                    </li>
+                    <li class="nav-item mx-1">
+                        <a class="nav-link px-3 py-2 rounded-pill btn-outline-light" 
+                           aria-current="page" href="/register"
+                           style="color: #fff; border: 2px solid rgba(255,255,255,0.3); transition: all 0.3s ease;"
+                           onmouseover="this.style.backgroundColor='rgba(255,255,255,0.2)'; this.style.borderColor='rgba(255,255,255,0.5)'; this.style.transform='translateY(-2px)'"
+                           onmouseout="this.style.backgroundColor='transparent'; this.style.borderColor='rgba(255,255,255,0.3)'; this.style.transform='translateY(0)'">
+                            <i class="fas fa-user-plus me-2"></i>REGISTER
+                        </a>
+                    </li>
+                    <li class="nav-item mx-1">
+                        <a class="nav-link px-3 py-2 rounded-pill" aria-current="page" href="#"
+                           style="color: #ffd700; transition: all 0.3s ease;"
+                           onmouseover="this.style.backgroundColor='rgba(255,215,0,0.2)'; this.style.transform='translateY(-2px)'"
+                           onmouseout="this.style.backgroundColor='transparent'; this.style.transform='translateY(0)'">
+                            <i class="fas fa-crown me-2"></i>ADMIN
+                        </a>
+                    </li>
                 </th:block>
                 <th:block th:if="${user!=null}">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa-solid fa-user"></i> [[${user.name}]] </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li class="nav-item dropdown mx-1">
+                        <a class="nav-link dropdown-toggle px-3 py-2 rounded-pill" 
+                           href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                           style="color: #fff; background: rgba(255,255,255,0.1); transition: all 0.3s ease;"
+                           onmouseover="this.style.backgroundColor='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'"
+                           onmouseout="this.style.backgroundColor='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+                            <i class="fa-solid fa-user me-2"></i>[[${user.name}]]
+                        </a>
+                        <ul class="dropdown-menu border-0 shadow-lg" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 15px;">
+                            <li>
+                                <a class="dropdown-item py-2 px-3 rounded-3 mx-2 my-1" href="#"
+                                   style="transition: all 0.3s ease;"
+                                   onmouseover="this.style.backgroundColor='#667eea'; this.style.color='white'"
+                                   onmouseout="this.style.backgroundColor='transparent'; this.style.color='#333'">
+                                    <i class="fas fa-user-circle me-2"></i>Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item py-2 px-3 rounded-3 mx-2 my-1" href="#"
+                                   style="transition: all 0.3s ease;"
+                                   onmouseover="this.style.backgroundColor='#667eea'; this.style.color='white'"
+                                   onmouseout="this.style.backgroundColor='transparent'; this.style.color='#333'">
+                                    <i class="fas fa-cog me-2"></i>Settings
+                                </a>
+                            </li>
                         </ul>
                     </li>
-                <!--To make it Dynamic-->
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="/logout"><i class="fa-solid fa-right-to-bracket-to-bracket"></i> LOGOUT</a></li>
+                    <li class="nav-item mx-1">
+                        <a class="nav-link px-3 py-2 rounded-pill" aria-current="page" href="/logout"
+                           style="color: #ff6b6b; transition: all 0.3s ease;"
+                           onmouseover="this.style.backgroundColor='rgba(255,107,107,0.2)'; this.style.transform='translateY(-2px)'"
+                           onmouseout="this.style.backgroundColor='transparent'; this.style.transform='translateY(0)'">
+                            <i class="fa-solid fa-right-from-bracket me-2"></i>LOGOUT
+                        </a>
+                    </li>
                 </th:block>
-
             </ul>
-
         </div>
     </div>
 </nav>
@@ -77,9 +146,16 @@
 <div th:replace="${content}"></div>
 
 <!-- Start Footer -->
-<div class="container-fluid p-1 bg-primary text-center text-white"
-     style="margin-top: 250px">
-    <p>ShoeHub.com</p>
+<div class="container-fluid p-4 text-center text-white"
+     style="margin-top: 250px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); box-shadow: 0 -2px 15px rgba(0,0,0,0.1);">
+    <div class="row">
+        <div class="col-12">
+            <p class="mb-2 fs-5 fw-bold">
+                <i class="fas fa-shoe-prints me-2" style="color: #ffd700;"></i>ShoeHub.com
+            </p>
+            <p class="mb-0 opacity-75">Your Premium Shoe Destination</p>
+        </div>
+    </div>
 </div>
 <!-- End Footer  -->
 <script
