@@ -10,7 +10,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -95,15 +95,11 @@ public class ProductServiceImpl implements ProductService {
     //To Get All Active products in UI
     @Override
     public List<Product> getAllActiveProducts(String category) {
-        List <Product> products = null ;
-
-        if(!ObjectUtils.isEmpty(category)){
-            products = productRepository.findByIsActiveTrue();
+        if (ObjectUtils.isEmpty(category) || category.trim().isEmpty()) {
+            return productRepository.findByIsActiveTrue();
         } else {
-            products = productRepository.findByCategory(category);
+            return productRepository.findByCategoryNameAndIsActiveTrue(category.trim());
         }
-
-        return products;
     }
 
 

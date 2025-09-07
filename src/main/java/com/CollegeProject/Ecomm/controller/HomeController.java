@@ -132,6 +132,7 @@ public class HomeController {
     public String showForgotPassword(){
         return "forgot_password";
     }
+    
     //To send mail
     @PostMapping("/forgot-password")
     public String processForgotPassword(@RequestParam String email, HttpSession session, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {

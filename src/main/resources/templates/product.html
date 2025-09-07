@@ -42,14 +42,14 @@
             <div class="list-group">
               <!-- All Categories link - active when no specific category is selected -->
               <a href="/products"
-                 th:classappend="${paramValue == null or paramValue == ''} ? 'active':''"
+                 th:classappend="${paramValue == null || paramValue == ''} ? 'active' : ''"
                  class="list-group-item list-group-item-action"
                  aria-current="true"> All Categories </a>
 
               <!-- Individual category links - active when that specific category is selected -->
               <a th:each="c:${categories}"
-                 th:href="@{'/products?category='+${c.name}}"
-                 th:classappend="${paramValue != null and paramValue == c.name} ? 'active':''"
+                 th:href="@{'/products?category=' + ${c.name}}"
+                 th:classappend="${paramValue != null && paramValue == c.name} ? 'active' : ''"
                  class="list-group-item list-group-item-action">[[${c.name}]]</a>
             </div>
           </div>

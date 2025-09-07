@@ -3,70 +3,110 @@
       th:replace="~{base::layout(~{::section})}">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Insert title here</title>
+    <title>Edit Category - ShoeHub Admin</title>
 </head>
 <body>
-<section>
-    <div class="container-fluid p-5 mt-5">
-        <div class="row">
-            <div class="col-md-3 offset-md-5">
-                <div class="card card-sh">
-                    <div class="card-header text-center ">
-                        <p class="fs-4">Edit Category</p>
-                        <th:block th:if="${session.succMsg}">
-                            <p class="text-success fw-bold">[[${session.succMsg}]]</p>
-                            <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
-                        </th:block>
+<section class="admin-dashboard">
+    <div class="container-fluid px-4">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">
+                <i class="fas fa-edit me-3"></i>Edit Category
+            </h1>
+            <p class="page-subtitle">Update category information and settings</p>
+        </div>
 
-                        <th:block th:if="${session.errorMsg}">
-                            <p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
-                            <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
-                        </th:block>
-
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-8">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h4><i class="fas fa-tag me-2"></i>Update Category Details</h4>
                     </div>
-                    <div class="card-body">
-                        <form action="/admin/updateCategory" method="post"
-                              enctype="multipart/form-data">
-                            <input type="hidden" name="id" th:value="${category.id}">
-                            <div class="mb-3">
-                                <label>Enter Category</label> <input type="text" name="name"
-                                                                     th:value="${category.name}" class="form-control">
-                            </div>
 
-                            <div class="mb-3">
-                                <label>Status</label>
+                    <!-- Success/Error Messages -->
+                    <th:block th:if="${session.succMsg}">
+                        <div class="alert-modern alert-success-modern">
+                            <i class="fas fa-check-circle me-2"></i>[[${session.succMsg}]]
+                        </div>
+                        <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+                    </th:block>
 
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio"
-                                           th:checked="${category.isActive==true}" value="true"
-                                           name="isActive" id="flexRadioDefault1"> <label
-                                        class="form-check-label" for="flexRadioDefault1">
-                                    Active </label>
+                    <th:block th:if="${session.errorMsg}">
+                        <div class="alert-modern alert-danger-modern">
+                            <i class="fas fa-exclamation-circle me-2"></i>[[${session.errorMsg}]]
+                        </div>
+                        <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+                    </th:block>
+
+                    <form action="/admin/updateCategory" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="id" th:value="${category.id}">
+                        
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-tag me-2"></i>Category Name
+                            </label>
+                            <input type="text" name="name" th:value="${category.name}" 
+                                   class="form-control form-control-modern" 
+                                   placeholder="Enter category name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-toggle-on me-2"></i>Status
+                            </label>
+                            <div class="radio-group">
+                                <div class="radio-item">
+                                    <input type="radio" value="true" name="isActive" id="active" 
+                                           th:checked="${category.isActive==true}">
+                                    <label for="active">Active</label>
                                 </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="isActive"
-                                           th:checked="${category.isActive==false}" value="false"
-                                           id="flexRadioDefault2"> <label
-                                        class="form-check-label" for="flexRadioDefault2">
-                                    Inactive </label>
+                                <div class="radio-item">
+                                    <input type="radio" value="false" name="isActive" id="inactive"
+                                           th:checked="${category.isActive==false}">
+                                    <label for="inactive">Inactive</label>
                                 </div>
-
                             </div>
+                        </div>
 
-                            <div class="mb-3">
-                                <label>Upload Image</label> <input type="file" name="file"
-                                                                   class="form-control">
+                        <!-- Current Image Display -->
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-image me-2"></i>Current Image
+                            </label>
+                            <div class="text-center mb-3">
+                                <img th:src="@{'/img/category_img/'+${category.imageName}}" 
+                                     class="category-image" width="120px" height="120px" 
+                                     th:alt="${category.name}"
+                                     style="border: 3px solid #e2e8f0; border-radius: 15px;">
+                                <p class="small text-muted mt-2">Current category image</p>
                             </div>
-                            <img th:src="@{'/img/category_img/'+${category.imageName}}"
-                                 width="100px" height="100px">
-                            <button class="btn btn-primary col-md-12 mt-2">Update</button>
-                        </form>
-                    </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-upload me-2"></i>Upload New Image (Optional)
+                            </label>
+                            <div class="file-upload-container">
+                                <input type="file" name="file" class="file-upload-input" accept="image/*">
+                                <label class="file-upload-label">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    Click to upload new image
+                                    <small class="d-block mt-1">Leave empty to keep current image</small>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-modern-primary flex-fill">
+                                <i class="fas fa-save me-2"></i>Update Category
+                            </button>
+                            <a href="/admin/category" class="btn btn-modern-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Back to Categories
+                            </a>
+                        </div>
+                    </form>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 </section>
