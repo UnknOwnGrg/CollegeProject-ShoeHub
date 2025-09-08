@@ -7,4 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<UserDtls, Integer> {
     public UserDtls findByEmail(String email);
+
+    public UserDtls findByResetToken(String token);
+
 }

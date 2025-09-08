@@ -10,4 +10,10 @@ public interface UserService {
     public UserDtls getUserByEmail(String email);
 
     void updateUserResetToken(String email, String resetToken);
+
+    public UserDtls getUserByToken(String token);
+
+    //TO update the UserDetails
+    //used after saving the password credentials
+    public UserDtls updateUser(UserDtls user);
 }

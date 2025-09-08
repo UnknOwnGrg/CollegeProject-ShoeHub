@@ -22,6 +22,7 @@ import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
@@ -51,6 +52,9 @@ public class HomeController {
 
     @Autowired
     private CommonUtil commonUtil;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     //To Get  User details After Login
     @ModelAttribute
@@ -160,7 +164,51 @@ public class HomeController {
     }
 
     @GetMapping("/reset-password")
-    public String showResetPassword(){
+    public String showResetPassword(@RequestParam String token, HttpSession session, Model m ) {
+
+        UserDtls userBytoken = userService.getUserByToken(token);
+                //To check that User value or token is null or not
+                if(ObjectUtils.isEmpty(userBytoken)){
+
+                    m.addAttribute("msg", "Link is Invalid or Expired");
+
+                    //we don't have to write this logic all again n again we can make a default page for that
+//                    session.setAttribute("errrorMsg", "Invalid token or Url");
+                    return "message";
+                }
+
+                //It will be sent out as hidden to pass it in the page
+                m.addAttribute("token", token);
+
         return "reset_password";
     }
+
+
+    @PostMapping("/reset-password")
+    public String resetPassword(@RequestParam String token,@RequestParam String password,  HttpSession session, Model m) {
+
+        UserDtls userByToken = userService.getUserByToken(token);
+        //Password must encoded and stored
+        if(userByToken == null){
+
+            //If token fails than it will throw this message
+            m.addAttribute("errorMsg", "Link is Invalid or Expired");
+
+            //Pass it into the Error page
+            return "message";
+
+        } else {
+            //If token is found then it will encode the password
+            userByToken.setPassword(passwordEncoder.encode(password));
+            userByToken.setResetToken(null); //then it token will be null
+            userService.updateUser(userByToken);    //Token will be update
+
+            //to  show the message
+            session.setAttribute("succMsg", "Password Changed Successfully.");
+           m.addAttribute("msg", "Password Changed Successfully.");
+
+            return "message";
+        }
+    }
+
 }

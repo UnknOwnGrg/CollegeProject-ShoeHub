@@ -37,7 +37,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUserResetToken(String email, String resetToken) {
         UserDtls findByEmail =  userRepository.findByEmail(email);
-        findByEmail.setReset_token(resetToken);
+        findByEmail.setResetToken(resetToken);
         userRepository.save(findByEmail);
+    }
+
+    //it will find the userToken by the help of Jpa UserRepository
+    @Override
+    public UserDtls getUserByToken(String token) {
+        return userRepository.findByResetToken(token);
+    }
+
+    //it will update the UserDetails.
+    @Override
+    public UserDtls updateUser(UserDtls user) {
+        return userRepository.save(user);
     }
 }

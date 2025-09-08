@@ -34,6 +34,7 @@ public class UserDtls {
 
     private String role;
 
+
     //For Email
-    private String reset_token;
+    private String resetToken;
 }

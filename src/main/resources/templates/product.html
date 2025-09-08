@@ -16,11 +16,99 @@
       background-color: #0b5ed7 !important;
       border-color: #0a58ca !important;
     }
+    
+    /* Sidebar (left) styles */
+    .categories-card {
+      border: none;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .categories-card .card-body {
+      padding: 0.25rem;
+    }
+    .categories-card .list-group-item {
+      border: none;
+      padding: 0.85rem 1rem;
+      transition: all 0.2s ease-in-out;
+    }
+    .categories-card .list-group-item:not(.active):hover {
+      background-color: #f5f7ff;
+      color: #0d6efd;
+      transform: translateX(4px);
+    }
+    .categories-card .list-group-item.active {
+      box-shadow: 0 8px 16px rgba(13,110,253,0.2);
+      font-weight: 600;
+    }
+
+    /* Search bar (top) */
+    .search-hero {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      border-radius: 0 0 20px 20px;
+    }
+    .search-hero .input-group .form-control {
+      border-radius: 999px;
+      padding: 0.8rem 1.1rem;
+      border: none;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    .search-hero .input-group .btn {
+      border-radius: 999px;
+      padding: 0.8rem 1.2rem;
+      border: none;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    /* Product grid and cards (right) */
+    .products-grid {
+      --bs-gutter-x: 1.5rem;
+      --bs-gutter-y: 1.5rem;
+    }
+    .product-card {
+      border: 1px solid rgba(0,0,0,0.05);
+      border-radius: 14px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+    }
+    .product-card-body {
+      padding: 1rem;
+    }
+    .product-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      transition: transform 0.25s ease;
+    }
+    .product-card:hover .product-image {
+      transform: scale(1.03);
+    }
+    .product-title {
+      margin: 0.75rem 0 0.25rem;
+      font-weight: 600;
+      color: #2d3748;
+    }
+    .price-tag {
+      color: #38a169;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .btn-view {
+      border-radius: 999px;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      box-shadow: 0 8px 20px rgba(13,110,253,0.25);
+    }
   </style>
 </head>
 <body>
 <section>
-  <div class="container-fluid bg-primary p-5 mt-5 ">
+  <div class="container-fluid bg-primary p-5 mt-5 search-hero">
     <div class="row">
       <div class="col-md-8 offset-md-2">
         <form>
@@ -36,8 +124,9 @@
   </div>
   <div class="container-fluid mt-1">
     <div class="row">
+      <!--Categories Card-->
       <div class="col-md-2 p-0">
-        <div class="card shadow-sm p-0 mb-5 bg-body-tertiary rounded">
+        <div class="card shadow-sm p-0 mb-5 bg-body-tertiary rounded categories-card">
           <div class="card-body">
             <div class="list-group">
               <!-- All Categories link - active when no specific category is selected -->
@@ -55,24 +144,26 @@
           </div>
         </div>
       </div>
+
+      <!--Products Card-->
       <div class="col-md-10">
         <div class="card shadow-sm p-3 mb-5 bg-body-tertiary rounded">
           <div class="card-body">
             <p class="fs-3 text-center">Products</p>
-            <div class="row">
+            <div class="row products-grid">
               <!--This is where the Looping will begins or we can say the Backend logic will Implements-->
               <div class="col-md-3 " th:each="p:${products}">
-                <div class="card">
-                  <div class="card-body ">
+                <div class="card product-card">
+                  <div class="card-body product-card-body">
                     <!--To make image Dynamic th:src -->
-                    <img alt="" th:src="@{'/img/product_img/'+${p.image}}" width="100%"
+                    <img alt="" th:src="@{'/img/product_img/'+${p.image}}" class="product-image" width="100%"
                          height="150px">
-                    <p class="fs-5 text-center">[[${p.title}]]</p>
+                    <p class="fs-5 text-center product-title">[[${p.title}]]</p>
                     <div class="row text-center">
-                      <p class="fs-6 fw-bold">
+                      <p class="fs-6 fw-bold price-tag">
                         &#8377; [[${p.price}]]
                       </p>
-                      <a th:href="@{'/product/'+${p.id}}" class="btn btn-primary col-md-6 offset-md-3">View
+                      <a th:href="@{'/product/'+${p.id}}" class="btn btn-primary col-md-6 offset-md-3 btn-view">View
                         Details</a>
                     </div>
                   </div>
