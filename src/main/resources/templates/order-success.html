@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::layout(~{::section})}">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Order Confirmed</title>
+</head>
+<body>
+<section class="success-page-body">
+  <!-- Success Header -->
+  <div class="container-fluid success-hero">
+    <div class="row">
+      <div class="col-12 text-center">
+        <div class="success-icon-container">
+          <i class="fas fa-check-circle success-icon"></i>
+        </div>
+        <h1>Order Confirmed!</h1>
+        <p>Thank you for your purchase. Your order has been successfully placed.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Progress -->
+  <div class="container">
+    <div class="checkout-progress mb-4">
+      <div class="progress-step active">
+        <div class="step-number">1</div>
+        <div class="step-label">Cart</div>
+      </div>
+      <div class="progress-line active"></div>
+      <div class="progress-step active">
+        <div class="step-number">2</div>
+        <div class="step-label">Checkout</div>
+      </div>
+      <div class="progress-line active"></div>
+      <div class="progress-step active">
+        <div class="step-number">3</div>
+        <div class="step-label">Payment</div>
+      </div>
+      <div class="progress-line active"></div>
+      <div class="progress-step active">
+        <div class="step-number">4</div>
+        <div class="step-label">Complete</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Content -->
+  <div class="container success-main-content">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Order Details Card -->
+        <div class="card success-card">
+          <div class="card-body">
+            <div class="order-summary-header">
+              <h4>Order Summary</h4>
+              <div class="order-id">
+                <span class="order-id-label">Order ID:</span>
+                <span class="order-id-value" id="orderIdDisplay">ORD1734156932847</span>
+              </div>
+            </div>
+
+            <!-- Order Status -->
+            <div class="order-status">
+              <div class="status-item active">
+                <div class="status-icon">
+                  <i class="fas fa-check"></i>
+                </div>
+                <div class="status-info">
+                  <h6>Order Confirmed</h6>
+                  <p id="orderDateTime">Dec 14, 2025 at 10:35 AM</p>
+                </div>
+              </div>
+              <div class="status-item">
+                <div class="status-icon">
+                  <i class="fas fa-box"></i>
+                </div>
+                <div class="status-info">
+                  <h6>Processing</h6>
+                  <p>We'll update you when your order is ready</p>
+                </div>
+              </div>
+              <div class="status-item">
+                <div class="status-icon">
+                  <i class="fas fa-truck"></i>
+                </div>
+                <div class="status-info">
+                  <h6>Shipped</h6>
+                  <p>Your order is on its way</p>
+                </div>
+              </div>
+              <div class="status-item">
+                <div class="status-icon">
+                  <i class="fas fa-home"></i>
+                </div>
+                <div class="status-info">
+                  <h6>Delivered</h6>
+                  <p>Enjoy your purchase!</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Customer & Delivery Info -->
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <div class="info-section">
+                  <h6><i class="fas fa-user me-2"></i>Customer Information</h6>
+                  <div class="info-content">
+                    <p id="customerNameDisplay">John Doe</p>
+                    <p id="customerEmailDisplay">john.doe@example.com</p>
+                    <p id="customerPhoneDisplay">+91 9876543210</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-section">
+                  <h6><i class="fas fa-truck me-2"></i>Delivery Information</h6>
+                  <div class="info-content">
+                    <p id="deliveryAddressDisplay">123 Main Street, Apartment 4B<br>Mumbai, Maharashtra 400001</p>
+                    <p id="deliveryMethodDisplay">Standard Delivery (5-7 business days)</p>
+                    <p class="estimated-delivery">Estimated Delivery: <span id="estimatedDate">Dec 21, 2025</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="order-items-section">
+              <h6><i class="fas fa-shopping-bag me-2"></i>Items Ordered</h6>
+              <div class="order-items">
+                <div class="order-item">
+                  <img src="/img/shoe4.svg" alt="Product" class="order-item-image">
+                  <div class="order-item-details">
+                    <h6>Premium Running Shoes</h6>
+                    <p>Size: 9 | Color: Black</p>
+                    <p>Qty: 1</p>
+                  </div>
+                  <div class="order-item-price">₹ 2,999</div>
+                </div>
+                <div class="order-item">
+                  <img src="/img/shoe7.svg" alt="Product" class="order-item-image">
+                  <div class="order-item-details">
+                    <h6>Casual Sneakers</h6>
+                    <p>Size: 8 | Color: White</p>
+                    <p>Qty: 2</p>
+                  </div>
+                  <div class="order-item-price">₹ 3,798</div>
+                </div>
+                <div class="order-item">
+                  <img src="/img/shoe5.svg" alt="Product" class="order-item-image">
+                  <div class="order-item-details">
+                    <h6>Formal Leather Shoes</h6>
+                    <p>Size: 9 | Color: Brown</p>
+                    <p>Qty: 1</p>
+                  </div>
+                  <div class="order-item-price">₹ 4,599</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Summary -->
+            <div class="payment-summary">
+              <h6><i class="fas fa-credit-card me-2"></i>Payment Summary</h6>
+              <div class="payment-details">
+                <div class="payment-row">
+                  <span>Subtotal</span>
+                  <span>₹ 11,396</span>
+                </div>
+                <div class="payment-row">
+                  <span>Shipping</span>
+                  <span>₹ 99</span>
+                </div>
+                <div class="payment-row">
+                  <span>Tax (18%)</span>
+                  <span>₹ 2,051</span>
+                </div>
+                <hr>
+                <div class="payment-row total-row">
+                  <span>Total Paid</span>
+                  <span>₹ 13,546</span>
+                </div>
+                <div class="payment-method">
+                  <span>Payment Method:</span>
+                  <span id="paymentMethodDisplay">Credit Card ending in ****1234</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="success-actions">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <a href="/products" class="btn btn-outline-primary btn-block">
+                <i class="fas fa-shopping-bag me-2"></i>Continue Shopping
+              </a>
+            </div>
+            <div class="col-md-4 mb-3">
+              <button class="btn btn-outline-secondary btn-block" onclick="downloadInvoice()">
+                <i class="fas fa-download me-2"></i>Download Invoice
+              </button>
+            </div>
+            <div class="col-md-4 mb-3">
+              <button class="btn btn-primary btn-block" onclick="trackOrder()">
+                <i class="fas fa-map-marker-alt me-2"></i>Track Order
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="additional-info">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="info-card-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="info-card-content">
+                  <h6>Order Confirmation</h6>
+                  <p>We've sent a confirmation email with your order details and tracking information.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="info-card">
+                <div class="info-card-icon">
+                  <i class="fas fa-headset"></i>
+                </div>
+                <div class="info-card-content">
+                  <h6>Need Help?</h6>
+                  <p>Contact our customer support team if you have any questions about your order.</p>
+                  <a href="/contact" class="support-link">Get Support</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div class="newsletter-section">
+          <div class="card newsletter-card">
+            <div class="card-body text-center">
+              <h5>Stay Updated!</h5>
+              <p>Subscribe to our newsletter for exclusive offers and updates on new arrivals.</p>
+              <div class="newsletter-form">
+                <div class="input-group">
+                  <input type="email" class="form-control" placeholder="Enter your email" id="newsletterEmail">
+                  <button class="btn btn-primary" onclick="subscribeNewsletter()">Subscribe</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      loadOrderDetails();
+      
+      // Clear cart data from sessionStorage
+      sessionStorage.removeItem('cartData');
+      sessionStorage.removeItem('checkoutData');
+    });
+
+    function loadOrderDetails() {
+      const orderData = JSON.parse(sessionStorage.getItem('orderData') || '{}');
+      const checkoutData = JSON.parse(sessionStorage.getItem('checkoutData') || '{}');
+      
+      if (orderData.orderId) {
+        document.getElementById('orderIdDisplay').textContent = orderData.orderId;
+        
+        // Format order date
+        const orderDate = new Date(orderData.timestamp);
+        document.getElementById('orderDateTime').textContent = 
+          orderDate.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric' 
+          }) + ' at ' + orderDate.toLocaleTimeString('en-US', { 
+            hour: 'numeric', 
+            minute: '2-digit', 
+            hour12: true 
+          });
+        
+        // Calculate estimated delivery (7 days from now)
+        const estimatedDate = new Date();
+        estimatedDate.setDate(estimatedDate.getDate() + 7);
+        document.getElementById('estimatedDate').textContent = 
+          estimatedDate.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric' 
+          });
+        
+        // Update payment method display
+        const paymentMethodMap = {
+          'creditCard': 'Credit Card ending in ****1234',
+          'upi': 'UPI Payment',
+          'netBanking': 'Net Banking',
+          'wallet': 'Digital Wallet',
+          'cod': 'Cash on Delivery'
+        };
+        
+        document.getElementById('paymentMethodDisplay').textContent = 
+          paymentMethodMap[orderData.paymentMethod] || 'Payment Completed';
+      }
+      
+      if (checkoutData.firstName) {
+        document.getElementById('customerNameDisplay').textContent = 
+          `${checkoutData.firstName} ${checkoutData.lastName}`;
+        document.getElementById('customerEmailDisplay').textContent = checkoutData.email;
+        document.getElementById('customerPhoneDisplay').textContent = `+91 ${checkoutData.phone}`;
+        
+        const address = `${checkoutData.address}\n${checkoutData.city}, ${checkoutData.state} ${checkoutData.pincode}`;
+        document.getElementById('deliveryAddressDisplay').innerHTML = address.replace('\n', '<br>');
+        
+        // Update delivery method based on selection
+        const deliveryMethodMap = {
+          'standard': 'Standard Delivery (5-7 business days)',
+          'express': 'Express Delivery (2-3 business days)',
+          'overnight': 'Overnight Delivery (Next business day)'
+        };
+        
+        document.getElementById('deliveryMethodDisplay').textContent = 
+          deliveryMethodMap[checkoutData.delivery] || 'Standard Delivery (5-7 business days)';
+      }
+    }
+
+    function downloadInvoice() {
+      // Simulate invoice download
+      const orderData = JSON.parse(sessionStorage.getItem('orderData') || '{}');
+      const orderId = orderData.orderId || 'ORD1234567890';
+      
+      // Create a simple invoice content
+      const invoiceContent = `
+        INVOICE
+        ========
+        
+        Order ID: ${orderId}
+        Date: ${new Date().toLocaleDateString()}
+        
+        Items:
+        - Premium Running Shoes x1: ₹2,999
+        - Casual Sneakers x2: ₹3,798
+        - Formal Leather Shoes x1: ₹4,599
+        
+        Subtotal: ₹11,396
+        Shipping: ₹99
+        Tax (18%): ₹2,051
+        Total: ₹13,546
+        
+        Thank you for your purchase!
+      `;
+      
+      // Create and download file
+      const blob = new Blob([invoiceContent], { type: 'text/plain' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `invoice-${orderId}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+      
+      showNotification('Invoice downloaded successfully!');
+    }
+
+    function trackOrder() {
+      const orderData = JSON.parse(sessionStorage.getItem('orderData') || '{}');
+      const orderId = orderData.orderId || 'ORD1234567890';
+      
+      // Simulate order tracking
+      alert(`Order tracking for ${orderId}:\n\n✓ Order Confirmed\n⏳ Processing\n⏳ Shipped\n⏳ Delivered\n\nYour order is currently being processed. You'll receive an email notification when it ships.`);
+    }
+
+    function subscribeNewsletter() {
+      const email = document.getElementById('newsletterEmail').value;
+      
+      if (!email) {
+        alert('Please enter your email address.');
+        return;
+      }
+      
+      if (!isValidEmail(email)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+      
+      // Simulate newsletter subscription
+      document.getElementById('newsletterEmail').value = '';
+      showNotification('Successfully subscribed to newsletter!');
+    }
+
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.className = 'success-notification';
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 3000);
+    }
+
+    // Confetti animation on page load
+    function createConfetti() {
+      const colors = ['#667eea', '#764ba2', '#059669', '#f59e0b', '#ef4444'];
+      
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + '%';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animationDelay = Math.random() * 2 + 's';
+          document.body.appendChild(confetti);
+          
+          setTimeout(() => {
+            document.body.removeChild(confetti);
+          }, 4000);
+        }, i * 50);
+      }
+    }
+
+    // Trigger confetti on page load
+    setTimeout(createConfetti, 500);
+  </script>
+</section>
+</body>
+</html>

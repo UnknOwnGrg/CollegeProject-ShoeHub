@@ -1,15 +1,20 @@
 package com.CollegeProject.Ecomm.controller;
 
+import com.CollegeProject.Ecomm.model.CartDb;
 import com.CollegeProject.Ecomm.model.Category;
 import com.CollegeProject.Ecomm.model.UserDtls;
+import com.CollegeProject.Ecomm.service.CartService;
 import com.CollegeProject.Ecomm.service.CategoryService;
 import com.CollegeProject.Ecomm.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
@@ -23,6 +28,9 @@ public class UserController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private CartService cartService;
 
     @GetMapping("/")
     public String home(){
@@ -41,5 +49,25 @@ public class UserController {
 
         List<Category> allActiveCategory = categoryService.getAllActiveCategory();
         m.addAttribute("categorys", allActiveCategory);
+    }
+
+
+    @GetMapping("/addCart")
+    public String addToCart(@RequestParam int pid, @RequestParam int uid, HttpSession session, Principal principal) {
+        System.out.println("AddCart called - Principal: " + principal);
+        System.out.println("User authenticated: " + (principal != null));
+
+        if (principal != null) {
+            System.out.println("User email: " + principal.getName());
+        }
+
+        CartDb saveCartDb = cartService.saveCart(pid, uid);
+
+        if (ObjectUtils.isEmpty(saveCartDb)) {
+            session.setAttribute("errorMsg", "Product add to cart failed");
+        } else {
+            session.setAttribute("succMsg", "Product added to cart");
+        }
+        return "redirect:/product/" + pid;
     }
 }

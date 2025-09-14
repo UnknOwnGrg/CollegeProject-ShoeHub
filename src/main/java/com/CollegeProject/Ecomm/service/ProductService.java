@@ -21,5 +21,10 @@ public interface ProductService {
     //to Get all the Products that Are Active which means
     //Products that are on Sales.
     public List<Product> getAllActiveProducts(String category);
-}
 
+    // Get total count of products
+    public long getTotalProductCount();
+
+    // Get count of active products
+    public long getActiveProductCount();
+}

@@ -16,4 +16,10 @@ public interface UserService {
     //TO update the UserDetails
     //used after saving the password credentials
     public UserDtls updateUser(UserDtls user);
+
+    // Get total count of users
+    public long getTotalUserCount();
+
+    // Get count of active users (users with ROLE_USER)
+    public long getActiveUserCount();
 }

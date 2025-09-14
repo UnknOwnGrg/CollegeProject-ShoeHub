@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::layout(~{::section})}">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Shopping Cart</title>
+</head>
+<body>
+<section class="cart-page-body">
+  <!-- Cart Header -->
+  <div class="container-fluid cart-hero">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1><i class="fas fa-shopping-cart me-3"></i>Your Shopping Cart</h1>
+        <p>Review your items and proceed to checkout</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Content -->
+  <div class="container cart-main-content">
+    <div class="row">
+      <!-- Cart Items Section -->
+      <div class="col-lg-8 mb-4">
+        <div class="card cart-items-card">
+          <div class="card-body">
+            <div class="cart-header">
+              <h3 class="cart-title">Cart Items</h3>
+              <span class="cart-count" id="cartItemCount">3 items</span>
+            </div>
+            
+            <!-- Cart Items List -->
+            <div class="cart-items-list" id="cartItemsList">
+              <!-- Sample Cart Item 1 -->
+              <div class="cart-item" data-product-id="1">
+                <div class="cart-item-image">
+                  <img src="/img/shoe4.svg" alt="Product" class="img-fluid">
+                </div>
+                <div class="cart-item-details">
+                  <h5 class="cart-item-title">Premium Running Shoes</h5>
+                  <p class="cart-item-description">Comfortable athletic shoes for daily wear</p>
+                  <div class="cart-item-price">₹ 2,999</div>
+                </div>
+                <div class="cart-item-quantity">
+                  <div class="quantity-controls">
+                    <button class="quantity-btn minus" onclick="updateQuantity(1, -1)">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <input type="number" class="quantity-input" value="1" min="1" max="10" readonly>
+                    <button class="quantity-btn plus" onclick="updateQuantity(1, 1)">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="cart-item-total">
+                  <span class="item-total">₹ 2,999</span>
+                </div>
+                <div class="cart-item-remove">
+                  <button class="remove-btn" onclick="removeFromCart(1)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Sample Cart Item 2 -->
+              <div class="cart-item" data-product-id="2">
+                <div class="cart-item-image">
+                  <img src="/img/shoe7.svg" alt="Product" class="img-fluid">
+                </div>
+                <div class="cart-item-details">
+                  <h5 class="cart-item-title">Casual Sneakers</h5>
+                  <p class="cart-item-description">Stylish casual shoes for everyday comfort</p>
+                  <div class="cart-item-price">₹ 1,899</div>
+                </div>
+                <div class="cart-item-quantity">
+                  <div class="quantity-controls">
+                    <button class="quantity-btn minus" onclick="updateQuantity(2, -1)">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <input type="number" class="quantity-input" value="2" min="1" max="10" readonly>
+                    <button class="quantity-btn plus" onclick="updateQuantity(2, 1)">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="cart-item-total">
+                  <span class="item-total">₹ 3,798</span>
+                </div>
+                <div class="cart-item-remove">
+                  <button class="remove-btn" onclick="removeFromCart(2)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Sample Cart Item 3 -->
+              <div class="cart-item" data-product-id="3">
+                <div class="cart-item-image">
+                  <img src="/img/shoe5.svg" alt="Product" class="img-fluid">
+                </div>
+                <div class="cart-item-details">
+                  <h5 class="cart-item-title">Formal Leather Shoes</h5>
+                  <p class="cart-item-description">Professional leather shoes for office wear</p>
+                  <div class="cart-item-price">₹ 4,599</div>
+                </div>
+                <div class="cart-item-quantity">
+                  <div class="quantity-controls">
+                    <button class="quantity-btn minus" onclick="updateQuantity(3, -1)">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                    <input type="number" class="quantity-input" value="1" min="1" max="10" readonly>
+                    <button class="quantity-btn plus" onclick="updateQuantity(3, 1)">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="cart-item-total">
+                  <span class="item-total">₹ 4,599</span>
+                </div>
+                <div class="cart-item-remove">
+                  <button class="remove-btn" onclick="removeFromCart(3)">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Empty Cart Message -->
+            <div class="empty-cart" id="emptyCart" style="display: none;">
+              <div class="text-center py-5">
+                <i class="fas fa-shopping-cart empty-cart-icon"></i>
+                <h4 class="mt-3">Your cart is empty</h4>
+                <p class="text-muted">Add some products to get started</p>
+                <a href="/products" class="btn btn-primary">
+                  <i class="fas fa-shopping-bag me-2"></i>Continue Shopping
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cart Summary Section -->
+      <div class="col-lg-4">
+        <div class="card cart-summary-card">
+          <div class="card-body">
+            <h4 class="summary-title">Order Summary</h4>
+            
+            <div class="summary-details">
+              <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotal">₹ 11,396</span>
+              </div>
+              <div class="summary-row">
+                <span>Shipping</span>
+                <span id="shipping">₹ 99</span>
+              </div>
+              <div class="summary-row">
+                <span>Tax (18%)</span>
+                <span id="tax">₹ 2,051</span>
+              </div>
+              <div class="summary-row discount-row" id="discountRow" style="display: none;">
+                <span>Discount</span>
+                <span id="discount">-₹ 0</span>
+              </div>
+              <hr>
+              <div class="summary-row total-row">
+                <span>Total</span>
+                <span id="total">₹ 13,546</span>
+              </div>
+            </div>
+
+            <!-- Coupon Code -->
+            <div class="coupon-section">
+              <div class="input-group">
+                <input type="text" class="form-control" id="couponCode" placeholder="Enter coupon code">
+                <button class="btn btn-outline-primary" onclick="applyCoupon()">Apply</button>
+              </div>
+              <div class="coupon-message" id="couponMessage"></div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="cart-actions">
+              <a href="/products" class="btn btn-outline-secondary btn-block mb-3">
+                <i class="fas fa-arrow-left me-2"></i>Continue Shopping
+              </a>
+              <a href="/checkout" class="btn btn-primary btn-block" id="checkoutBtn">
+                <i class="fas fa-credit-card me-2"></i>Proceed to Checkout
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recommended Products -->
+        <div class="card recommended-card mt-4">
+          <div class="card-body">
+            <h5 class="recommended-title">You might also like</h5>
+            <div class="recommended-items">
+              <div class="recommended-item">
+                <img src="/img/shoe6.svg" alt="Product" class="recommended-image">
+                <div class="recommended-details">
+                  <h6>Sports Shoes</h6>
+                  <span class="recommended-price">₹ 2,299</span>
+                </div>
+                <button class="btn btn-sm btn-outline-primary" onclick="addRecommendedToCart(4)">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <div class="recommended-item">
+                <img src="/img/shoe8.svg" alt="Product" class="recommended-image">
+                <div class="recommended-details">
+                  <h6>Canvas Shoes</h6>
+                  <span class="recommended-price">₹ 1,599</span>
+                </div>
+                <button class="btn btn-sm btn-outline-primary" onclick="addRecommendedToCart(5)">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart JavaScript -->
+  <script>
+    // Cart data structure
+    let cartData = {
+      items: [
+        { id: 1, name: "Premium Running Shoes", price: 2999, quantity: 1, image: "/img/shoe4.svg" },
+        { id: 2, name: "Casual Sneakers", price: 1899, quantity: 2, image: "/img/shoe7.svg" },
+        { id: 3, name: "Formal Leather Shoes", price: 4599, quantity: 1, image: "/img/shoe5.svg" }
+      ],
+      coupon: null,
+      discount: 0
+    };
+
+    // Update quantity function
+    function updateQuantity(productId, change) {
+      const item = cartData.items.find(item => item.id === productId);
+      if (item) {
+        const newQuantity = item.quantity + change;
+        if (newQuantity >= 1 && newQuantity <= 10) {
+          item.quantity = newQuantity;
+          updateCartDisplay();
+        }
+      }
+    }
+
+    // Remove item from cart
+    function removeFromCart(productId) {
+      if (confirm('Are you sure you want to remove this item?')) {
+        cartData.items = cartData.items.filter(item => item.id !== productId);
+        updateCartDisplay();
+      }
+    }
+
+    // Apply coupon code
+    function applyCoupon() {
+      const couponCode = document.getElementById('couponCode').value.trim();
+      const messageEl = document.getElementById('couponMessage');
+      
+      if (!couponCode) {
+        showCouponMessage('Please enter a coupon code', 'error');
+        return;
+      }
+
+      // Simulate coupon validation
+      const validCoupons = {
+        'SAVE10': { discount: 10, type: 'percentage' },
+        'FLAT500': { discount: 500, type: 'fixed' },
+        'WELCOME20': { discount: 20, type: 'percentage' }
+      };
+
+      if (validCoupons[couponCode.toUpperCase()]) {
+        cartData.coupon = validCoupons[couponCode.toUpperCase()];
+        showCouponMessage('Coupon applied successfully!', 'success');
+        updateCartDisplay();
+      } else {
+        showCouponMessage('Invalid coupon code', 'error');
+      }
+    }
+
+    // Show coupon message
+    function showCouponMessage(message, type) {
+      const messageEl = document.getElementById('couponMessage');
+      messageEl.textContent = message;
+      messageEl.className = `coupon-message ${type}`;
+      setTimeout(() => {
+        messageEl.textContent = '';
+        messageEl.className = 'coupon-message';
+      }, 3000);
+    }
+
+    // Add recommended item to cart
+    function addRecommendedToCart(productId) {
+      const recommendedItems = {
+        4: { id: 4, name: "Sports Shoes", price: 2299, quantity: 1, image: "/img/shoe6.svg" },
+        5: { id: 5, name: "Canvas Shoes", price: 1599, quantity: 1, image: "/img/shoe8.svg" }
+      };
+
+      const existingItem = cartData.items.find(item => item.id === productId);
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cartData.items.push(recommendedItems[productId]);
+      }
+      
+      updateCartDisplay();
+      showNotification('Item added to cart!');
+    }
+
+    // Show notification
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.className = 'cart-notification';
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.classList.add('show');
+      }, 100);
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 2000);
+    }
+
+    // Update cart display
+    function updateCartDisplay() {
+      const cartItemsList = document.getElementById('cartItemsList');
+      const emptyCart = document.getElementById('emptyCart');
+      
+      if (cartData.items.length === 0) {
+        cartItemsList.style.display = 'none';
+        emptyCart.style.display = 'block';
+        document.getElementById('checkoutBtn').style.display = 'none';
+      } else {
+        cartItemsList.style.display = 'block';
+        emptyCart.style.display = 'none';
+        document.getElementById('checkoutBtn').style.display = 'block';
+        
+        // Update cart items
+        cartItemsList.innerHTML = cartData.items.map(item => `
+          <div class="cart-item" data-product-id="${item.id}">
+            <div class="cart-item-image">
+              <img src="${item.image}" alt="Product" class="img-fluid">
+            </div>
+            <div class="cart-item-details">
+              <h5 class="cart-item-title">${item.name}</h5>
+              <p class="cart-item-description">Premium quality footwear</p>
+              <div class="cart-item-price">₹ ${item.price.toLocaleString()}</div>
+            </div>
+            <div class="cart-item-quantity">
+              <div class="quantity-controls">
+                <button class="quantity-btn minus" onclick="updateQuantity(${item.id}, -1)">
+                  <i class="fas fa-minus"></i>
+                </button>
+                <input type="number" class="quantity-input" value="${item.quantity}" min="1" max="10" readonly>
+                <button class="quantity-btn plus" onclick="updateQuantity(${item.id}, 1)">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="cart-item-total">
+              <span class="item-total">₹ ${(item.price * item.quantity).toLocaleString()}</span>
+            </div>
+            <div class="cart-item-remove">
+              <button class="remove-btn" onclick="removeFromCart(${item.id})">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+      
+      // Update summary
+      updateOrderSummary();
+    }
+
+    // Update order summary
+    function updateOrderSummary() {
+      const subtotal = cartData.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const shipping = subtotal > 0 ? 99 : 0;
+      const tax = Math.round(subtotal * 0.18);
+      
+      let discount = 0;
+      if (cartData.coupon) {
+        if (cartData.coupon.type === 'percentage') {
+          discount = Math.round(subtotal * cartData.coupon.discount / 100);
+        } else {
+          discount = cartData.coupon.discount;
+        }
+      }
+      
+      const total = subtotal + shipping + tax - discount;
+      
+      document.getElementById('cartItemCount').textContent = `${cartData.items.length} items`;
+      document.getElementById('subtotal').textContent = `₹ ${subtotal.toLocaleString()}`;
+      document.getElementById('shipping').textContent = `₹ ${shipping.toLocaleString()}`;
+      document.getElementById('tax').textContent = `₹ ${tax.toLocaleString()}`;
+      document.getElementById('total').textContent = `₹ ${total.toLocaleString()}`;
+      
+      const discountRow = document.getElementById('discountRow');
+      if (discount > 0) {
+        document.getElementById('discount').textContent = `-₹ ${discount.toLocaleString()}`;
+        discountRow.style.display = 'flex';
+      } else {
+        discountRow.style.display = 'none';
+      }
+    }
+
+    // Initialize cart on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      updateCartDisplay();
+    });
+  </script>
+</section>
+</body>
+</html>

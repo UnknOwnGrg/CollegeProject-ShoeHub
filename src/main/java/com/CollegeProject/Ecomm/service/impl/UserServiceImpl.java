@@ -52,4 +52,17 @@ public class UserServiceImpl implements UserService {
     public UserDtls updateUser(UserDtls user) {
         return userRepository.save(user);
     }
+
+    @Override
+    public long getTotalUserCount() {
+        return userRepository.count();
+    }
+
+    @Override
+    public long getActiveUserCount() {
+        // Count users with ROLE_USER (excluding admins)
+        return userRepository.findAll().stream()
+                .filter(user -> "ROLE_USER".equals(user.getRole()))
+                .count();
+    }
 }

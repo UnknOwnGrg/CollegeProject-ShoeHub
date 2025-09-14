@@ -23,6 +23,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -51,7 +52,18 @@ public class AdminController {
     }
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model m) {
+        // Get dashboard statistics
+        long totalProducts = productService.getTotalProductCount();
+        long totalCategories = categoryService.getTotalCategoryCount();
+        long totalUsers = userService.getActiveUserCount();
+        
+        // Add statistics to model
+        m.addAttribute("totalProducts", totalProducts);
+        m.addAttribute("totalCategories", totalCategories);
+        m.addAttribute("totalUsers", totalUsers);
+        m.addAttribute("totalOrders", 0L); // Placeholder for orders (not implemented yet)
+        
         return "admin/index";
     }
 

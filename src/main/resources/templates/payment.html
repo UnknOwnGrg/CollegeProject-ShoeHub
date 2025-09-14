@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::layout(~{::section})}">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Payment</title>
+</head>
+<body>
+<section class="payment-page-body">
+  <!-- Payment Header -->
+  <div class="container-fluid payment-hero">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1><i class="fas fa-credit-card me-3"></i>Payment</h1>
+        <p>Secure payment processing</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Progress -->
+  <div class="container">
+    <div class="checkout-progress mb-4">
+      <div class="progress-step active">
+        <div class="step-number">1</div>
+        <div class="step-label">Cart</div>
+      </div>
+      <div class="progress-line active"></div>
+      <div class="progress-step active">
+        <div class="step-number">2</div>
+        <div class="step-label">Checkout</div>
+      </div>
+      <div class="progress-line active"></div>
+      <div class="progress-step active">
+        <div class="step-number">3</div>
+        <div class="step-label">Payment</div>
+      </div>
+      <div class="progress-line"></div>
+      <div class="progress-step">
+        <div class="step-number">4</div>
+        <div class="step-label">Complete</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Content -->
+  <div class="container payment-main-content">
+    <div class="row">
+      <!-- Payment Methods Section -->
+      <div class="col-lg-8 mb-4">
+        <div class="card payment-card">
+          <div class="card-body">
+            <h4 class="payment-section-title">
+              <i class="fas fa-credit-card me-2"></i>Payment Method
+            </h4>
+            
+            <!-- Payment Method Selection -->
+            <div class="payment-methods">
+              <div class="payment-method">
+                <input type="radio" id="creditCard" name="paymentMethod" value="creditCard" checked>
+                <label for="creditCard" class="payment-method-label">
+                  <div class="payment-method-icon">
+                    <i class="fas fa-credit-card"></i>
+                  </div>
+                  <div class="payment-method-info">
+                    <h6>Credit/Debit Card</h6>
+                    <p>Visa, MasterCard, RuPay</p>
+                  </div>
+                  <div class="payment-method-logos">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                  </div>
+                </label>
+              </div>
+              
+              <div class="payment-method">
+                <input type="radio" id="upi" name="paymentMethod" value="upi">
+                <label for="upi" class="payment-method-label">
+                  <div class="payment-method-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                  </div>
+                  <div class="payment-method-info">
+                    <h6>UPI Payment</h6>
+                    <p>PhonePe, Google Pay, Paytm</p>
+                  </div>
+                  <div class="payment-method-logos">
+                    <span class="upi-logo">UPI</span>
+                  </div>
+                </label>
+              </div>
+              
+              <div class="payment-method">
+                <input type="radio" id="netBanking" name="paymentMethod" value="netBanking">
+                <label for="netBanking" class="payment-method-label">
+                  <div class="payment-method-icon">
+                    <i class="fas fa-university"></i>
+                  </div>
+                  <div class="payment-method-info">
+                    <h6>Net Banking</h6>
+                    <p>All major banks supported</p>
+                  </div>
+                  <div class="payment-method-logos">
+                    <i class="fas fa-university"></i>
+                  </div>
+                </label>
+              </div>
+              
+              <div class="payment-method">
+                <input type="radio" id="wallet" name="paymentMethod" value="wallet">
+                <label for="wallet" class="payment-method-label">
+                  <div class="payment-method-icon">
+                    <i class="fas fa-wallet"></i>
+                  </div>
+                  <div class="payment-method-info">
+                    <h6>Digital Wallet</h6>
+                    <p>Paytm, Amazon Pay, PhonePe</p>
+                  </div>
+                  <div class="payment-method-logos">
+                    <i class="fas fa-wallet"></i>
+                  </div>
+                </label>
+              </div>
+              
+              <div class="payment-method">
+                <input type="radio" id="cod" name="paymentMethod" value="cod">
+                <label for="cod" class="payment-method-label">
+                  <div class="payment-method-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                  </div>
+                  <div class="payment-method-info">
+                    <h6>Cash on Delivery</h6>
+                    <p>Pay when you receive</p>
+                  </div>
+                  <div class="payment-method-logos">
+                    <span class="cod-logo">COD</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Details Forms -->
+        <!-- Credit Card Form -->
+        <div class="card payment-details-card" id="creditCardForm">
+          <div class="card-body">
+            <h5 class="payment-details-title">Card Details</h5>
+            <form id="cardPaymentForm">
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <label for="cardNumber" class="form-label">Card Number *</label>
+                  <input type="text" class="form-control payment-input" id="cardNumber" 
+                         placeholder="1234 5678 9012 3456" maxlength="19" required>
+                  <div class="invalid-feedback">Please enter a valid card number.</div>
+                </div>
+                <div class="col-md-8 mb-3">
+                  <label for="cardName" class="form-label">Cardholder Name *</label>
+                  <input type="text" class="form-control payment-input" id="cardName" 
+                         placeholder="John Doe" required>
+                  <div class="invalid-feedback">Please enter the cardholder name.</div>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <label for="cardExpiry" class="form-label">Expiry Date *</label>
+                  <input type="text" class="form-control payment-input" id="cardExpiry" 
+                         placeholder="MM/YY" maxlength="5" required>
+                  <div class="invalid-feedback">Please enter expiry date.</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="cardCvv" class="form-label">CVV *</label>
+                  <input type="password" class="form-control payment-input" id="cardCvv" 
+                         placeholder="123" maxlength="4" required>
+                  <div class="invalid-feedback">Please enter CVV.</div>
+                </div>
+                <div class="col-md-6 mb-3 d-flex align-items-end">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="saveCard">
+                    <label class="form-check-label" for="saveCard">
+                      Save card for future payments
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- UPI Form -->
+        <div class="card payment-details-card" id="upiForm" style="display: none;">
+          <div class="card-body">
+            <h5 class="payment-details-title">UPI Payment</h5>
+            <form id="upiPaymentForm">
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <label for="upiId" class="form-label">UPI ID *</label>
+                  <input type="text" class="form-control payment-input" id="upiId" 
+                         placeholder="yourname@paytm" required>
+                  <div class="invalid-feedback">Please enter a valid UPI ID.</div>
+                </div>
+              </div>
+              <div class="upi-apps">
+                <h6>Or pay using UPI apps:</h6>
+                <div class="upi-app-buttons">
+                  <button type="button" class="btn upi-app-btn" onclick="payWithUPIApp('googlepay')">
+                    <i class="fab fa-google-pay"></i> Google Pay
+                  </button>
+                  <button type="button" class="btn upi-app-btn" onclick="payWithUPIApp('phonepe')">
+                    <i class="fas fa-mobile-alt"></i> PhonePe
+                  </button>
+                  <button type="button" class="btn upi-app-btn" onclick="payWithUPIApp('paytm')">
+                    <i class="fas fa-wallet"></i> Paytm
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Net Banking Form -->
+        <div class="card payment-details-card" id="netBankingForm" style="display: none;">
+          <div class="card-body">
+            <h5 class="payment-details-title">Select Your Bank</h5>
+            <form id="netBankingPaymentForm">
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <label for="bankSelect" class="form-label">Choose Bank *</label>
+                  <select class="form-select payment-input" id="bankSelect" required>
+                    <option value="">Select your bank</option>
+                    <option value="sbi">State Bank of India</option>
+                    <option value="hdfc">HDFC Bank</option>
+                    <option value="icici">ICICI Bank</option>
+                    <option value="axis">Axis Bank</option>
+                    <option value="kotak">Kotak Mahindra Bank</option>
+                    <option value="pnb">Punjab National Bank</option>
+                    <option value="bob">Bank of Baroda</option>
+                    <option value="canara">Canara Bank</option>
+                    <option value="union">Union Bank of India</option>
+                    <option value="other">Other Banks</option>
+                  </select>
+                  <div class="invalid-feedback">Please select your bank.</div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Wallet Form -->
+        <div class="card payment-details-card" id="walletForm" style="display: none;">
+          <div class="card-body">
+            <h5 class="payment-details-title">Digital Wallet</h5>
+            <form id="walletPaymentForm">
+              <div class="wallet-options">
+                <div class="wallet-option">
+                  <input type="radio" id="paytmWallet" name="walletType" value="paytm" checked>
+                  <label for="paytmWallet" class="wallet-label">
+                    <i class="fas fa-wallet"></i> Paytm Wallet
+                  </label>
+                </div>
+                <div class="wallet-option">
+                  <input type="radio" id="amazonPay" name="walletType" value="amazonpay">
+                  <label for="amazonPay" class="wallet-label">
+                    <i class="fab fa-amazon-pay"></i> Amazon Pay
+                  </label>
+                </div>
+                <div class="wallet-option">
+                  <input type="radio" id="phonePeWallet" name="walletType" value="phonepe">
+                  <label for="phonePeWallet" class="wallet-label">
+                    <i class="fas fa-mobile-alt"></i> PhonePe Wallet
+                  </label>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- COD Form -->
+        <div class="card payment-details-card" id="codForm" style="display: none;">
+          <div class="card-body">
+            <h5 class="payment-details-title">Cash on Delivery</h5>
+            <div class="cod-info">
+              <div class="cod-icon">
+                <i class="fas fa-money-bill-wave"></i>
+              </div>
+              <div class="cod-details">
+                <h6>Pay when you receive your order</h6>
+                <p>You can pay in cash to our delivery executive when your order arrives.</p>
+                <ul>
+                  <li>No additional charges for COD</li>
+                  <li>Exact change preferred</li>
+                  <li>Available for orders up to ₹50,000</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary Section -->
+      <div class="col-lg-4">
+        <div class="card payment-summary-card">
+          <div class="card-body">
+            <h4 class="summary-title">Order Summary</h4>
+            
+            <!-- Customer Details -->
+            <div class="customer-details" id="customerDetails">
+              <h6>Delivery Address</h6>
+              <div class="address-info">
+                <p id="customerName">John Doe</p>
+                <p id="customerAddress">123 Main Street, Apartment 4B<br>Mumbai, Maharashtra 400001</p>
+                <p id="customerPhone">+91 9876543210</p>
+              </div>
+            </div>
+
+            <!-- Order Items -->
+            <div class="order-items">
+              <div class="order-item">
+                <img src="/img/shoe4.svg" alt="Product" class="order-item-image">
+                <div class="order-item-details">
+                  <h6>Premium Running Shoes</h6>
+                  <p>Qty: 1</p>
+                </div>
+                <div class="order-item-price">₹ 2,999</div>
+              </div>
+              <div class="order-item">
+                <img src="/img/shoe7.svg" alt="Product" class="order-item-image">
+                <div class="order-item-details">
+                  <h6>Casual Sneakers</h6>
+                  <p>Qty: 2</p>
+                </div>
+                <div class="order-item-price">₹ 3,798</div>
+              </div>
+              <div class="order-item">
+                <img src="/img/shoe5.svg" alt="Product" class="order-item-image">
+                <div class="order-item-details">
+                  <h6>Formal Leather Shoes</h6>
+                  <p>Qty: 1</p>
+                </div>
+                <div class="order-item-price">₹ 4,599</div>
+              </div>
+            </div>
+
+            <!-- Price Breakdown -->
+            <div class="price-breakdown">
+              <div class="price-row">
+                <span>Subtotal</span>
+                <span id="paymentSubtotal">₹ 11,396</span>
+              </div>
+              <div class="price-row">
+                <span>Shipping</span>
+                <span id="paymentShipping">₹ 99</span>
+              </div>
+              <div class="price-row">
+                <span>Tax (18%)</span>
+                <span id="paymentTax">₹ 2,051</span>
+              </div>
+              <hr>
+              <div class="price-row total-row">
+                <span>Total Amount</span>
+                <span id="paymentTotal">₹ 13,546</span>
+              </div>
+            </div>
+
+            <!-- Payment Button -->
+            <div class="payment-actions">
+              <button type="button" class="btn btn-primary btn-block" id="payNowBtn" onclick="processPayment()">
+                <i class="fas fa-lock me-2"></i>Pay Securely
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security Info -->
+        <div class="card security-card mt-4">
+          <div class="card-body text-center">
+            <i class="fas fa-shield-alt security-icon"></i>
+            <h6>100% Secure Payment</h6>
+            <p class="text-muted small">Your payment information is encrypted and secure</p>
+            <div class="security-badges">
+              <i class="fas fa-lock"></i>
+              <span>SSL Encrypted</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Processing Modal -->
+  <div class="modal fade" id="paymentProcessingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center p-4">
+          <div class="processing-animation">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          <h5 class="mt-3">Processing Payment...</h5>
+          <p class="text-muted">Please wait while we process your payment securely.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load customer details from sessionStorage
+      loadCustomerDetails();
+      
+      // Payment method selection
+      const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+      paymentMethods.forEach(method => {
+        method.addEventListener('change', function() {
+          showPaymentForm(this.value);
+        });
+      });
+
+      // Card number formatting
+      const cardNumberInput = document.getElementById('cardNumber');
+      if (cardNumberInput) {
+        cardNumberInput.addEventListener('input', function() {
+          this.value = this.value.replace(/\D/g, '').replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+        });
+      }
+
+      // Card expiry formatting
+      const cardExpiryInput = document.getElementById('cardExpiry');
+      if (cardExpiryInput) {
+        cardExpiryInput.addEventListener('input', function() {
+          this.value = this.value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2');
+        });
+      }
+
+      // CVV validation
+      const cardCvvInput = document.getElementById('cardCvv');
+      if (cardCvvInput) {
+        cardCvvInput.addEventListener('input', function() {
+          this.value = this.value.replace(/\D/g, '');
+        });
+      }
+
+      // UPI ID validation
+      const upiIdInput = document.getElementById('upiId');
+      if (upiIdInput) {
+        upiIdInput.addEventListener('input', function() {
+          const value = this.value.toLowerCase();
+          if (value && !value.includes('@')) {
+            this.setCustomValidity('UPI ID must contain @');
+          } else {
+            this.setCustomValidity('');
+          }
+        });
+      }
+    });
+
+    function loadCustomerDetails() {
+      const checkoutData = JSON.parse(sessionStorage.getItem('checkoutData') || '{}');
+      
+      if (checkoutData.firstName) {
+        document.getElementById('customerName').textContent = 
+          `${checkoutData.firstName} ${checkoutData.lastName}`;
+        
+        const address = `${checkoutData.address}\n${checkoutData.city}, ${checkoutData.state} ${checkoutData.pincode}`;
+        document.getElementById('customerAddress').innerHTML = address.replace('\n', '<br>');
+        
+        document.getElementById('customerPhone').textContent = `+91 ${checkoutData.phone}`;
+      }
+    }
+
+    function showPaymentForm(paymentMethod) {
+      // Hide all payment forms
+      const forms = document.querySelectorAll('.payment-details-card');
+      forms.forEach(form => form.style.display = 'none');
+      
+      // Show selected payment form
+      const selectedForm = document.getElementById(paymentMethod + 'Form');
+      if (selectedForm) {
+        selectedForm.style.display = 'block';
+      }
+      
+      // Update pay button text
+      const payBtn = document.getElementById('payNowBtn');
+      switch(paymentMethod) {
+        case 'creditCard':
+          payBtn.innerHTML = '<i class="fas fa-credit-card me-2"></i>Pay with Card';
+          break;
+        case 'upi':
+          payBtn.innerHTML = '<i class="fas fa-mobile-alt me-2"></i>Pay with UPI';
+          break;
+        case 'netBanking':
+          payBtn.innerHTML = '<i class="fas fa-university me-2"></i>Pay with Net Banking';
+          break;
+        case 'wallet':
+          payBtn.innerHTML = '<i class="fas fa-wallet me-2"></i>Pay with Wallet';
+          break;
+        case 'cod':
+          payBtn.innerHTML = '<i class="fas fa-money-bill-wave me-2"></i>Place Order';
+          break;
+      }
+    }
+
+    function payWithUPIApp(app) {
+      const amount = 13546;
+      const upiId = 'merchant@paytm'; // Merchant UPI ID
+      
+      let upiUrl = '';
+      switch(app) {
+        case 'googlepay':
+          upiUrl = `tez://upi/pay?pa=${upiId}&pn=ShoeHub&am=${amount}&cu=INR`;
+          break;
+        case 'phonepe':
+          upiUrl = `phonepe://pay?pa=${upiId}&pn=ShoeHub&am=${amount}&cu=INR`;
+          break;
+        case 'paytm':
+          upiUrl = `paytmmp://pay?pa=${upiId}&pn=ShoeHub&am=${amount}&cu=INR`;
+          break;
+      }
+      
+      // Try to open UPI app
+      window.location.href = upiUrl;
+      
+      // Fallback: show QR code or manual UPI ID
+      setTimeout(() => {
+        alert('Please complete the payment in your UPI app and return to this page.');
+      }, 1000);
+    }
+
+    function processPayment() {
+      const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+      
+      // Validate payment form based on selected method
+      if (!validatePaymentForm(selectedPaymentMethod)) {
+        return;
+      }
+      
+      // Show processing modal
+      const modal = new bootstrap.Modal(document.getElementById('paymentProcessingModal'));
+      modal.show();
+      
+      // Simulate payment processing
+      setTimeout(() => {
+        modal.hide();
+        
+        // Store order details
+        const orderData = {
+          orderId: 'ORD' + Date.now(),
+          paymentMethod: selectedPaymentMethod,
+          amount: 13546,
+          status: 'success',
+          timestamp: new Date().toISOString()
+        };
+        
+        sessionStorage.setItem('orderData', JSON.stringify(orderData));
+        
+        // Redirect to success page
+        window.location.href = '/order-success';
+      }, 3000);
+    }
+
+    function validatePaymentForm(paymentMethod) {
+      let isValid = true;
+      
+      switch(paymentMethod) {
+        case 'creditCard':
+          const cardForm = document.getElementById('cardPaymentForm');
+          const cardInputs = cardForm.querySelectorAll('input[required]');
+          cardInputs.forEach(input => {
+            if (!input.value.trim()) {
+              input.classList.add('is-invalid');
+              isValid = false;
+            } else {
+              input.classList.remove('is-invalid');
+              input.classList.add('is-valid');
+            }
+          });
+          
+          // Validate card number (basic Luhn algorithm check)
+          const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+          if (cardNumber.length < 13 || cardNumber.length > 19) {
+            document.getElementById('cardNumber').classList.add('is-invalid');
+            isValid = false;
+          }
+          break;
+          
+        case 'upi':
+          const upiId = document.getElementById('upiId').value;
+          if (upiId && !upiId.includes('@')) {
+            document.getElementById('upiId').classList.add('is-invalid');
+            isValid = false;
+          }
+          break;
+          
+        case 'netBanking':
+          const bankSelect = document.getElementById('bankSelect');
+          if (!bankSelect.value) {
+            bankSelect.classList.add('is-invalid');
+            isValid = false;
+          }
+          break;
+          
+        case 'wallet':
+          // Wallet validation (if needed)
+          break;
+          
+        case 'cod':
+          // COD doesn't need validation
+          break;
+      }
+      
+      if (!isValid) {
+        alert('Please fill in all required fields correctly.');
+      }
+      
+      return isValid;
+    }
+
+    // Initialize with credit card form visible
+    showPaymentForm('creditCard');
+  </script>
+</section>
+</body>
+</html>

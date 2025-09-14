@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::layout(~{::section})}">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Checkout</title>
+</head>
+<body>
+<section class="checkout-page-body">
+  <!-- Checkout Header -->
+  <div class="container-fluid checkout-hero">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1><i class="fas fa-credit-card me-3"></i>Checkout</h1>
+        <p>Complete your order details</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Progress -->
+  <div class="container">
+    <div class="checkout-progress mb-4">
+      <div class="progress-step active">
+        <div class="step-number">1</div>
+        <div class="step-label">Cart</div>
+      </div>
+      <div class="progress-line active"></div>
+      <div class="progress-step active">
+        <div class="step-number">2</div>
+        <div class="step-label">Checkout</div>
+      </div>
+      <div class="progress-line"></div>
+      <div class="progress-step">
+        <div class="step-number">3</div>
+        <div class="step-label">Payment</div>
+      </div>
+      <div class="progress-line"></div>
+      <div class="progress-step">
+        <div class="step-number">4</div>
+        <div class="step-label">Complete</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkout Content -->
+  <div class="container checkout-main-content">
+    <form id="checkoutForm" action="/payment" method="post">
+      <div class="row">
+        <!-- Customer Details Section -->
+        <div class="col-lg-8 mb-4">
+          <!-- Contact Information -->
+          <div class="card checkout-card mb-4">
+            <div class="card-body">
+              <h4 class="checkout-section-title">
+                <i class="fas fa-user me-2"></i>Contact Information
+              </h4>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="firstName" class="form-label">First Name *</label>
+                  <input type="text" class="form-control checkout-input" id="firstName" name="firstName" required>
+                  <div class="invalid-feedback">Please enter your first name.</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="lastName" class="form-label">Last Name *</label>
+                  <input type="text" class="form-control checkout-input" id="lastName" name="lastName" required>
+                  <div class="invalid-feedback">Please enter your last name.</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="email" class="form-label">Email Address *</label>
+                  <input type="email" class="form-control checkout-input" id="email" name="email" required>
+                  <div class="invalid-feedback">Please enter a valid email address.</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="phone" class="form-label">Phone Number *</label>
+                  <input type="tel" class="form-control checkout-input" id="phone" name="phone" required>
+                  <div class="invalid-feedback">Please enter your phone number.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Shipping Address -->
+          <div class="card checkout-card mb-4">
+            <div class="card-body">
+              <h4 class="checkout-section-title">
+                <i class="fas fa-truck me-2"></i>Shipping Address
+              </h4>
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <label for="address" class="form-label">Street Address *</label>
+                  <input type="text" class="form-control checkout-input" id="address" name="address" required>
+                  <div class="invalid-feedback">Please enter your street address.</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="city" class="form-label">City *</label>
+                  <input type="text" class="form-control checkout-input" id="city" name="city" required>
+                  <div class="invalid-feedback">Please enter your city.</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="state" class="form-label">State *</label>
+                  <select class="form-select checkout-input" id="state" name="state" required>
+                    <option value="">Select State</option>
+                    <option value="AP">Andhra Pradesh</option>
+                    <option value="AR">Arunachal Pradesh</option>
+                    <option value="AS">Assam</option>
+                    <option value="BR">Bihar</option>
+                    <option value="CT">Chhattisgarh</option>
+                    <option value="GA">Goa</option>
+                    <option value="GJ">Gujarat</option>
+                    <option value="HR">Haryana</option>
+                    <option value="HP">Himachal Pradesh</option>
+                    <option value="JK">Jammu and Kashmir</option>
+                    <option value="JH">Jharkhand</option>
+                    <option value="KA">Karnataka</option>
+                    <option value="KL">Kerala</option>
+                    <option value="MP">Madhya Pradesh</option>
+                    <option value="MH">Maharashtra</option>
+                    <option value="MN">Manipur</option>
+                    <option value="ML">Meghalaya</option>
+                    <option value="MZ">Mizoram</option>
+                    <option value="NL">Nagaland</option>
+                    <option value="OR">Odisha</option>
+                    <option value="PB">Punjab</option>
+                    <option value="RJ">Rajasthan</option>
+                    <option value="SK">Sikkim</option>
+                    <option value="TN">Tamil Nadu</option>
+                    <option value="TG">Telangana</option>
+                    <option value="TR">Tripura</option>
+                    <option value="UP">Uttar Pradesh</option>
+                    <option value="UT">Uttarakhand</option>
+                    <option value="WB">West Bengal</option>
+                  </select>
+                  <div class="invalid-feedback">Please select your state.</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="pincode" class="form-label">PIN Code *</label>
+                  <input type="text" class="form-control checkout-input" id="pincode" name="pincode" pattern="[0-9]{6}" required>
+                  <div class="invalid-feedback">Please enter a valid 6-digit PIN code.</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="country" class="form-label">Country</label>
+                  <input type="text" class="form-control checkout-input" id="country" name="country" value="India" readonly>
+                </div>
+              </div>
+              
+              <!-- Billing Address Same as Shipping -->
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="sameAddress" checked>
+                <label class="form-check-label" for="sameAddress">
+                  Billing address is same as shipping address
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Billing Address (Hidden by default) -->
+          <div class="card checkout-card mb-4" id="billingAddressCard" style="display: none;">
+            <div class="card-body">
+              <h4 class="checkout-section-title">
+                <i class="fas fa-file-invoice me-2"></i>Billing Address
+              </h4>
+              <div class="row">
+                <div class="col-12 mb-3">
+                  <label for="billingAddress" class="form-label">Street Address *</label>
+                  <input type="text" class="form-control checkout-input" id="billingAddress" name="billingAddress">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="billingCity" class="form-label">City *</label>
+                  <input type="text" class="form-control checkout-input" id="billingCity" name="billingCity">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="billingState" class="form-label">State *</label>
+                  <select class="form-select checkout-input" id="billingState" name="billingState">
+                    <option value="">Select State</option>
+                    <option value="AP">Andhra Pradesh</option>
+                    <option value="AR">Arunachal Pradesh</option>
+                    <option value="AS">Assam</option>
+                    <option value="BR">Bihar</option>
+                    <option value="CT">Chhattisgarh</option>
+                    <option value="GA">Goa</option>
+                    <option value="GJ">Gujarat</option>
+                    <option value="HR">Haryana</option>
+                    <option value="HP">Himachal Pradesh</option>
+                    <option value="JK">Jammu and Kashmir</option>
+                    <option value="JH">Jharkhand</option>
+                    <option value="KA">Karnataka</option>
+                    <option value="KL">Kerala</option>
+                    <option value="MP">Madhya Pradesh</option>
+                    <option value="MH">Maharashtra</option>
+                    <option value="MN">Manipur</option>
+                    <option value="ML">Meghalaya</option>
+                    <option value="MZ">Mizoram</option>
+                    <option value="NL">Nagaland</option>
+                    <option value="OR">Odisha</option>
+                    <option value="PB">Punjab</option>
+                    <option value="RJ">Rajasthan</option>
+                    <option value="SK">Sikkim</option>
+                    <option value="TN">Tamil Nadu</option>
+                    <option value="TG">Telangana</option>
+                    <option value="TR">Tripura</option>
+                    <option value="UP">Uttar Pradesh</option>
+                    <option value="UT">Uttarakhand</option>
+                    <option value="WB">West Bengal</option>
+                  </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="billingPincode" class="form-label">PIN Code *</label>
+                  <input type="text" class="form-control checkout-input" id="billingPincode" name="billingPincode" pattern="[0-9]{6}">
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="billingCountry" class="form-label">Country</label>
+                  <input type="text" class="form-control checkout-input" id="billingCountry" name="billingCountry" value="India" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Delivery Options -->
+          <div class="card checkout-card">
+            <div class="card-body">
+              <h4 class="checkout-section-title">
+                <i class="fas fa-shipping-fast me-2"></i>Delivery Options
+              </h4>
+              <div class="delivery-options">
+                <div class="delivery-option">
+                  <input type="radio" id="standard" name="delivery" value="standard" checked>
+                  <label for="standard" class="delivery-label">
+                    <div class="delivery-info">
+                      <h6>Standard Delivery</h6>
+                      <p>5-7 business days</p>
+                    </div>
+                    <div class="delivery-price">₹ 99</div>
+                  </label>
+                </div>
+                <div class="delivery-option">
+                  <input type="radio" id="express" name="delivery" value="express">
+                  <label for="express" class="delivery-label">
+                    <div class="delivery-info">
+                      <h6>Express Delivery</h6>
+                      <p>2-3 business days</p>
+                    </div>
+                    <div class="delivery-price">₹ 199</div>
+                  </label>
+                </div>
+                <div class="delivery-option">
+                  <input type="radio" id="overnight" name="delivery" value="overnight">
+                  <label for="overnight" class="delivery-label">
+                    <div class="delivery-info">
+                      <h6>Overnight Delivery</h6>
+                      <p>Next business day</p>
+                    </div>
+                    <div class="delivery-price">₹ 399</div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Summary Section -->
+        <div class="col-lg-4">
+          <div class="card checkout-summary-card">
+            <div class="card-body">
+              <h4 class="summary-title">Order Summary</h4>
+              
+              <!-- Order Items -->
+              <div class="order-items">
+                <div class="order-item">
+                  <img src="/img/shoe4.svg" alt="Product" class="order-item-image">
+                  <div class="order-item-details">
+                    <h6>Premium Running Shoes</h6>
+                    <p>Qty: 1</p>
+                  </div>
+                  <div class="order-item-price">₹ 2,999</div>
+                </div>
+                <div class="order-item">
+                  <img src="/img/shoe7.svg" alt="Product" class="order-item-image">
+                  <div class="order-item-details">
+                    <h6>Casual Sneakers</h6>
+                    <p>Qty: 2</p>
+                  </div>
+                  <div class="order-item-price">₹ 3,798</div>
+                </div>
+                <div class="order-item">
+                  <img src="/img/shoe5.svg" alt="Product" class="order-item-image">
+                  <div class="order-item-details">
+                    <h6>Formal Leather Shoes</h6>
+                    <p>Qty: 1</p>
+                  </div>
+                  <div class="order-item-price">₹ 4,599</div>
+                </div>
+              </div>
+
+              <!-- Price Breakdown -->
+              <div class="price-breakdown">
+                <div class="price-row">
+                  <span>Subtotal</span>
+                  <span id="checkoutSubtotal">₹ 11,396</span>
+                </div>
+                <div class="price-row">
+                  <span>Shipping</span>
+                  <span id="checkoutShipping">₹ 99</span>
+                </div>
+                <div class="price-row">
+                  <span>Tax (18%)</span>
+                  <span id="checkoutTax">₹ 2,051</span>
+                </div>
+                <div class="price-row discount-row" id="checkoutDiscountRow" style="display: none;">
+                  <span>Discount</span>
+                  <span id="checkoutDiscount">-₹ 0</span>
+                </div>
+                <hr>
+                <div class="price-row total-row">
+                  <span>Total</span>
+                  <span id="checkoutTotal">₹ 13,546</span>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="checkout-actions">
+                <a href="/cart" class="btn btn-outline-secondary btn-block mb-3">
+                  <i class="fas fa-arrow-left me-2"></i>Back to Cart
+                </a>
+                <button type="submit" class="btn btn-primary btn-block">
+                  <i class="fas fa-credit-card me-2"></i>Continue to Payment
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security Info -->
+          <div class="card security-card mt-4">
+            <div class="card-body text-center">
+              <i class="fas fa-shield-alt security-icon"></i>
+              <h6>Secure Checkout</h6>
+              <p class="text-muted small">Your information is protected with 256-bit SSL encryption</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Checkout JavaScript -->
+  <script>
+    // Form validation and interaction
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('checkoutForm');
+      const sameAddressCheckbox = document.getElementById('sameAddress');
+      const billingAddressCard = document.getElementById('billingAddressCard');
+      const deliveryOptions = document.querySelectorAll('input[name="delivery"]');
+
+      // Toggle billing address visibility
+      sameAddressCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+          billingAddressCard.style.display = 'none';
+          // Clear billing address fields
+          billingAddressCard.querySelectorAll('input, select').forEach(field => {
+            field.removeAttribute('required');
+            field.value = '';
+          });
+        } else {
+          billingAddressCard.style.display = 'block';
+          // Make billing address fields required
+          billingAddressCard.querySelectorAll('input:not([readonly]), select').forEach(field => {
+            if (field.id !== 'billingCountry') {
+              field.setAttribute('required', '');
+            }
+          });
+        }
+      });
+
+      // Update shipping cost based on delivery option
+      deliveryOptions.forEach(option => {
+        option.addEventListener('change', function() {
+          updateShippingCost();
+        });
+      });
+
+      // Form validation
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (validateForm()) {
+          // Store form data in sessionStorage for payment page
+          const formData = new FormData(form);
+          const checkoutData = {};
+          
+          for (let [key, value] of formData.entries()) {
+            checkoutData[key] = value;
+          }
+          
+          sessionStorage.setItem('checkoutData', JSON.stringify(checkoutData));
+          
+          // Redirect to payment page
+          window.location.href = '/payment';
+        }
+      });
+
+      // Real-time validation
+      const inputs = form.querySelectorAll('input, select');
+      inputs.forEach(input => {
+        input.addEventListener('blur', function() {
+          validateField(this);
+        });
+        
+        input.addEventListener('input', function() {
+          if (this.classList.contains('is-invalid')) {
+            validateField(this);
+          }
+        });
+      });
+
+      // PIN code validation
+      const pincodeInputs = document.querySelectorAll('#pincode, #billingPincode');
+      pincodeInputs.forEach(input => {
+        input.addEventListener('input', function() {
+          this.value = this.value.replace(/\D/g, '').substring(0, 6);
+        });
+      });
+
+      // Phone number validation
+      const phoneInput = document.getElementById('phone');
+      phoneInput.addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g, '').substring(0, 10);
+      });
+    });
+
+    function validateForm() {
+      const form = document.getElementById('checkoutForm');
+      const inputs = form.querySelectorAll('input[required], select[required]');
+      let isValid = true;
+
+      inputs.forEach(input => {
+        if (!validateField(input)) {
+          isValid = false;
+        }
+      });
+
+      return isValid;
+    }
+
+    function validateField(field) {
+      const value = field.value.trim();
+      let isValid = true;
+      let message = '';
+
+      // Required field validation
+      if (field.hasAttribute('required') && !value) {
+        isValid = false;
+        message = 'This field is required.';
+      }
+
+      // Email validation
+      if (field.type === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+          isValid = false;
+          message = 'Please enter a valid email address.';
+        }
+      }
+
+      // Phone validation
+      if (field.id === 'phone' && value) {
+        if (value.length !== 10) {
+          isValid = false;
+          message = 'Please enter a valid 10-digit phone number.';
+        }
+      }
+
+      // PIN code validation
+      if ((field.id === 'pincode' || field.id === 'billingPincode') && value) {
+        if (value.length !== 6) {
+          isValid = false;
+          message = 'Please enter a valid 6-digit PIN code.';
+        }
+      }
+
+      // Update field appearance
+      if (isValid) {
+        field.classList.remove('is-invalid');
+        field.classList.add('is-valid');
+      } else {
+        field.classList.remove('is-valid');
+        field.classList.add('is-invalid');
+        const feedback = field.nextElementSibling;
+        if (feedback && feedback.classList.contains('invalid-feedback')) {
+          feedback.textContent = message;
+        }
+      }
+
+      return isValid;
+    }
+
+    function updateShippingCost() {
+      const selectedDelivery = document.querySelector('input[name="delivery"]:checked');
+      const shippingElement = document.getElementById('checkoutShipping');
+      const totalElement = document.getElementById('checkoutTotal');
+      
+      let shippingCost = 99; // Default standard shipping
+      
+      switch(selectedDelivery.value) {
+        case 'standard':
+          shippingCost = 99;
+          break;
+        case 'express':
+          shippingCost = 199;
+          break;
+        case 'overnight':
+          shippingCost = 399;
+          break;
+      }
+      
+      // Update shipping cost display
+      shippingElement.textContent = `₹ ${shippingCost.toLocaleString()}`;
+      
+      // Recalculate total
+      const subtotal = 11396;
+      const tax = 2051;
+      const total = subtotal + shippingCost + tax;
+      
+      totalElement.textContent = `₹ ${total.toLocaleString()}`;
+    }
+
+    // Auto-fill demo data (for testing)
+    function fillDemoData() {
+      document.getElementById('firstName').value = 'John';
+      document.getElementById('lastName').value = 'Doe';
+      document.getElementById('email').value = 'john.doe@example.com';
+      document.getElementById('phone').value = '9876543210';
+      document.getElementById('address').value = '123 Main Street, Apartment 4B';
+      document.getElementById('city').value = 'Mumbai';
+      document.getElementById('state').value = 'MH';
+      document.getElementById('pincode').value = '400001';
+    }
+
+    // Uncomment the line below to auto-fill demo data for testing
+    // fillDemoData();
+  </script>
+</section>
+</body>
+</html>

@@ -20,4 +20,10 @@ public interface CategoryService {
     //it will used to abstract the Active Category data
     public List<Category> getAllActiveCategory();
 
+    // Get total count of categories
+    public long getTotalCategoryCount();
+
+    // Get count of active categories
+    public long getActiveCategoryCount();
+
 }

@@ -58,7 +58,9 @@ public class HomeController {
 
     //To Get  User details After Login
     @ModelAttribute
+    //Principal Object Saves the Object of the Security
     public void getUserDetails(Principal p, Model m) {
+       //Meaans that user id logged in
         if(p != null ){
             String email = p.getName();
             UserDtls userDtls = userService.getUserByEmail(email);

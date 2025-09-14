@@ -102,5 +102,13 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    @Override
+    public long getTotalProductCount() {
+        return productRepository.count();
+    }
 
+    @Override
+    public long getActiveProductCount() {
+        return productRepository.findByIsActiveTrue().size();
+    }
 }

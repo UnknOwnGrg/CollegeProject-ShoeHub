@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -51,6 +52,16 @@ public class CategoryServiceImpl implements CategoryService {
         //I need to create a Custom method to REpository to find is it Ture or False from Database.
         List <Category> categories =categoryRepository.findByIsActiveTrue();
         return categories;
+    }
+
+    @Override
+    public long getTotalCategoryCount() {
+        return categoryRepository.count();
+    }
+
+    @Override
+    public long getActiveCategoryCount() {
+        return categoryRepository.findByIsActiveTrue().size();
     }
 
 }
