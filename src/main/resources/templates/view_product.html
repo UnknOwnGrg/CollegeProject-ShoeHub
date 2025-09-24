@@ -5,13 +5,17 @@
     <meta charset="ISO-8859-1">
     <title>[[${product.title}]] - Product Details</title>
     <style>
+        body{
+            padding-top: 180px;
+        }
         .product-detail-container {
             background: white;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
             overflow: hidden;
-            margin-top: 70px;
+            margin-top: 20px;
             margin-bottom: 100px;
+           
         }
         
         .product-image-container {
@@ -154,8 +158,8 @@
     </style>
 </head>
 <body>
-<section>
-    <div class="container product-detail-container">
+<section >
+    <div class="container product-detail-container" style="margin-top:50px;">
         <div class="col-md-12 p-5">
             <!-- Display success message -->
             <th:block th:if="${session.succMsg}">
@@ -175,16 +179,16 @@
                 <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
             </th:block>
             
-            <div class="row">
-                <div class="col-md-6 text-center">
+            <div class="row g-4">
+                <div class="col-md-6 text-center pe-md-3">
                     <div class="product-image-container">
                         <img alt="[[${product.title}]]" 
-                             th:src="@{'/img/product_img/'+${product.image}}" 
+                             th:src="@{'/img/'+${product.image}}"
                              class="product-detail-image">
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-6 ps-md-3">
                     <h1 class="product-title-detail">[[${product.title}]]</h1>
                     
                     <div class="product-description">

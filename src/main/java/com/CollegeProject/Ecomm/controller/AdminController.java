@@ -104,7 +104,7 @@ public class AdminController {
                 Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "category_img" + File.separator
                         + file.getOriginalFilename());
 
-                // System.out.println(path);
+                 System.out.println("Category Image"+path);
                 Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
                 session.setAttribute("succMsg", "Saved successfully");
@@ -186,7 +186,7 @@ public class AdminController {
             Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + "product_img" + File.separator
                     + image.getOriginalFilename());
 
-            System.out.println(path);
+            System.out.println("Product Image"+path);
             Files.copy(image.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
             session.setAttribute("succMsg", "Product Saved Success");
